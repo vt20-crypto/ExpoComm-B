@@ -1,77 +1,55 @@
-# Exponential Topology-enabled Scalable Communication in Multi-agent Reinforcement Learning
+# ExpoComm-B: Bandwidth-Constrained Exponential Topology
 
+This repository contains the implementation of **ExpoComm-B**, a coursework project for COMP 559 (Machine Learning with Graphs) at Rice University. 
 
-This is the implementation of our paper "[Exponential Topology-enabled Scalable Communication in Multi-agent Reinforcement Learning]()" in ICLR 2025.
+This project builds upon the original **ExpoComm** architecture by natively integrating a **Bandwidth-constrained Variational Message Encoding (BVME)** bottleneck. This allows reinforcement learning agents to learn sparse communication graphs while also heavily compressing the messages they send, reducing overall bandwidth requirements.
 
-## Getting Started
+## 🚀 Getting Started
 
-**Create Conda Environment**
+We recommend using Miniforge to manage your cluster environments (as Anaconda is deprecated on clusters like Rice NOTS).
 
-Install Python environment with conda:
+**1. Create Conda Environment**
 ```bash
-conda create -n ExpoComm python=3.8
-conda activate ExpoComm
+conda create -n expocomm-b python=3.8
+conda activate expocomm-b
 ```
 
-**Install Epymarl**
+**2. Install Core Dependencies**
 ```bash
 cd src
 pip install -r requirements.txt
 cd ..
 ```
 
-**Install IMP environment**
-
+**3. Install Custom MAgent/PettingZoo**
+Because this repository relies on legacy MARL benchmarks, you must use these specific versions:
 ```bash
-pip install git+https://github.com/moratodpg/imp_marl.git
-```
-
-**Install MAgent environment**
-
-```bash
-pip install magent==0.1.14
-pip install pettingzoo==1.12.0
+pip install pettingzoo[magent]==1.14.0 supersuit==3.3.0
 cp env/battle_v3_view7.py PATH_TO_YOUR_PETTINGZOO_ENV/pettingzoo/magent/
 cp env/adversarial_pursuit_view8_v3.py PATH_TO_YOUR_PETTINGZOO_ENV/pettingzoo/magent/
 ```
 
-To ease the environment setup, we also provide the environmental setup we used containing detailed version information in `ExpoComm_env.yaml`. 
+---
 
-## Acknowledgement
-The code is implement based on the following open-source projects
-- [EPyMARL](https://github.com/uoe-agents/epymarl)
+## 💻 Running Experiments
 
-and the following MARL environments:
-- [IMP-MARL](https://github.com/moratodpg/imp_marl)
-- [MAgent 2](https://github.com/Farama-Foundation/MAgent2)
+The master run script uses the PyMARL registry system. You can launch training runs directly on an HPC cluster:
 
-Please refer to those repo for more documentation.
-
-## Run an experiment 
-
-```shell
-python src/main.py --config=[Algorithm name] --env-config=[Env name] --exp-config=[Experiment name]
+```bash
+python src/main.py --config=ExpoComm_B_qmix --env-config=MAgent_Battle run_name="GPU-Run"
 ```
 
-The config files are all located in `src/config`.
+All experiment results, metrics, and PyTorch `.pt` checkpoints will be stored in the `work_dirs/` directory and automatically synced to Weights & Biases if configured.
 
-`--config` refers to the config files in `src/config/algs`.
-`--env-config` refers to the config files in `src/config/envs`.
-`--exp-config` refers to the config files in `src/config/exp`. If you want to change the configuration of a particular experiment, you can do so by modifying the yaml file here.
+---
 
-All results will be stored in the `work_dirs` folder.
+## 🙏 Acknowledgement & Citations
 
-For example, run ExpoComm on Adversarial Pursuit with 25 predators:
+The baseline codebase, exponential topology implementation, and multi-agent controllers are built directly upon the open-source **ExpoComm** repository, which utilized [EPyMARL](https://github.com/uoe-agents/epymarl) and [MAgent 2](https://github.com/Farama-Foundation/MAgent2). Our BVME module is integrated into their framework.
 
-```shell
-python src/main.py --config=ExpoComm_one_peer_n6 --env-config=MAgent_AdvPursuit --exp-config=ExpoComm_AdvPursuit45_s0
-```
+**If you use the original exponential topology code in your research or find it helpful, please cite the original authors' paper:**
 
-
-## Citing
-
-If you use this code in your research or find it helpful, please consider citing our paper:
-```
+```bibtex
 @inproceedings{liexponential,
   title={Exponential Topology-enabled Scalable Communication in Multi-agent Reinforcement Learning},
   author={Li, Xinran and Wang, Xiaolu and Bai, Chenjia and Zhang, Jun},
