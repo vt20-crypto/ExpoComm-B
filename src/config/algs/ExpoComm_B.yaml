@@ -1,0 +1,56 @@
+# --- ExpoComm-B: ExpoComm + BVME ---
+# Sparse exponential topology + variational message compression
+
+# use epsilon greedy action selector
+action_selector: "epsilon_greedy"
+epsilon_start: 1.0
+epsilon_finish: 0.05
+epsilon_anneal_time: 500000
+evaluation_epsilon: 0.0
+runner: "episode"
+
+buffer_size: 5000
+
+# update the target network every {} episodes
+target_update_interval_or_tau: 200
+
+# --- ExpoComm-B specific ---
+mac: "ExpoComm_bvme_mac"
+topk_neighbors: 7  # including itself (log2(N) + 1 neighbors)
+one_peer: True
+agent: "ExpoComm_bvme"
+obs_agent_id: False
+obs_last_action: False
+obs_individual_obs: False
+
+# --- BVME hyperparameters ---
+# sigma_0: Prior standard deviation. Controls per-dimension info capacity.
+#   Smaller = tighter bandwidth constraint.
+bvme_sigma_0: 0.01
+
+# lambda_kl: Weight of KL divergence loss in total training objective.
+#   Higher = stronger bandwidth constraint enforcement.
+bvme_lambda_kl: 1.0
+
+# compressed_dim: Dimension of compressed message. Set to null to use
+#   hidden_dim (information-theoretic compression without dim reduction).
+#   Set to e.g. 32 for 50% dimensional compression (if hidden_dim=64).
+bvme_compressed_dim: null
+
+# Log-variance clamp range for numerical stability
+bvme_log_var_min: -5.0
+bvme_log_var_max: 3.0
+
+# --- Training ---
+agent_output_type: "q"
+learner: "bvme_q_learner"
+aux_coef: 0.1  # Coefficient for auxiliary state prediction loss
+standardise_returns: False
+standardise_rewards: True
+double_q: True
+use_rnn: True
+mixer:  # Mixer becomes None (IQL mode)
+
+pos_flag: False
+
+name: "ExpoComm_B"

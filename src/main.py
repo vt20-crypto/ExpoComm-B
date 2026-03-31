@@ -2,6 +2,7 @@ import numpy as np
 import os
 import random
 import collections
+import collections.abc
 from os.path import dirname, abspath
 from copy import deepcopy
 import sys
@@ -42,9 +43,9 @@ def main(config_dict):
         log_file=osp.join(work_dir, f"{timestamp}.log"),
     )
     wandb.init(
-        project=exp_name,
+        project=os.environ.get("WANDB_PROJECT", exp_name),
         name=run_name + "-" + algo_name + "-" + timestamp,
-        entity="lxxxxr",
+        entity=os.environ.get("WANDB_ENTITY", "vt20-rice-university"),
         config=config,
     )
     run(config, console_logger)
@@ -77,7 +78,7 @@ def _get_config(params, arg_name, subfolder):
 
 def recursive_dict_update(d, u):
     for k, v in u.items():
-        if isinstance(v, collections.Mapping):
+        if isinstance(v, collections.abc.Mapping):
             d[k] = recursive_dict_update(d.get(k, {}), v)
         else:
             d[k] = v

@@ -1,4 +1,5 @@
 from .q_learner import QLearner, AuxQLearner, ContQLearner
+from .bvme_q_learner import BVMEQLearner
 from .coma_learner import COMALearner
 from .qtran_learner import QLearner as QTranLearner
 from .actor_critic_learner import ActorCriticLearner
@@ -12,6 +13,7 @@ REGISTRY = {}
 REGISTRY["q_learner"] = QLearner
 REGISTRY["aux_q_learner"] = AuxQLearner  # customized
 REGISTRY["cont_q_learner"] = ContQLearner  # customized
+REGISTRY["bvme_q_learner"] = BVMEQLearner  # ExpoComm-B
 REGISTRY["coma_learner"] = COMALearner
 REGISTRY["qtran_learner"] = QTranLearner
 REGISTRY["actor_critic_learner"] = ActorCriticLearner
