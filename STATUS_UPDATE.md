@@ -9,13 +9,14 @@
 
 ## 1. Executive Summary
 
-Over the weekend of March 29–30, we successfully built the core **ExpoComm-B** architecture from scratch, deployed it on the Rice NOTS HPC cluster, and launched our first training run on the MAgent Battle environment. The BVME variational bottleneck module was implemented entirely from the paper (no public code exists), integrated into the ExpoComm codebase, and verified end-to-end. Training metrics are being tracked live on Weights & Biases.
+Till now, we successfully built the core **ExpoComm-B** architecture from scratch, deployed it on the Rice NOTS HPC cluster, and launched our first training run on the MAgent Battle environment. The BVME variational bottleneck module was implemented entirely from the paper (no public code exists), integrated into the ExpoComm codebase, and verified end-to-end. Training metrics are being tracked live on Weights & Biases.
 
 ---
 
 ## 2. What Has Been Completed
 
 ### Environment & Infrastructure Setup ✅
+
 | Task | Status | Notes |
 |------|--------|-------|
 | Clone ExpoComm repo & explore architecture | ✅ Done | Apache 2.0 licensed, built on EPyMARL framework |
@@ -26,6 +27,7 @@ Over the weekend of March 29–30, we successfully built the core **ExpoComm-B**
 | Push codebase to team GitHub repo | ✅ Done | `github.com/vt20-crypto/ExpoComm-B` with proper attribution |
 
 ### Core BVME Implementation (From Paper) ✅
+
 | File Created | What It Does |
 |-------------|-------------|
 | `src/modules/bvme.py` | The standalone BVME module — variational encoder (μ, σ), reparameterization trick, KL divergence loss computation |
@@ -36,12 +38,14 @@ Over the weekend of March 29–30, we successfully built the core **ExpoComm-B**
 | `tests/test_bvme.py` | Unit tests verifying BVME module correctness (encoding, KL computation, deterministic eval mode) |
 
 ### Documentation ✅
+
 | Document | Purpose |
 |---------|---------|
 | `ExpoComm-B-Knowledge-Transfer.md` | Comprehensive knowledge transfer doc for the team — covers background, architecture, BVME math, codebase walkthrough, team roles |
 | `README.md` | Rewritten for our project with proper attribution and citation of original ExpoComm authors |
 
 ### First Training Run ✅
+
 - **Environment**: MAgent Battle (45×45 grid, ~81 blue agents vs pretrained red team)
 - **Algorithm**: ExpoComm-B with QMIX mixer
 - **Duration**: Ran for ~23 hours on NOTS CPU node (`commons` partition)
@@ -70,10 +74,12 @@ Over the weekend of March 29–30, we successfully built the core **ExpoComm-B**
 | SLURM job killed at 24h | `commons` partition has a strict 24-hour time limit | Noted for future runs; will use `long` partition (72h) or GPU acceleration |
 
 ### Open Issue: Training Speed on CPU
+
 - At 451k/5M timesteps in 23 hours, the estimated total time is **~8 days on CPU**.
 - **Solution**: We have created a new SLURM script (`run_gpu.slurm`) that explicitly requests an NVIDIA GPU via `--gres=gpu:1`. This should reduce training time from days to hours. **This job is currently running (Job ID: 7966302).**
 
 ### Open Issue: NOTS I/O Compliance
+
 - Rice's documentation strictly prohibits using `$HOME` (NFS) for job I/O.
 - **Solution**: The new `run_gpu.slurm` script copies the entire codebase to `$SHARED_SCRATCH` before training, fully complying with NOTS rules.
 
@@ -87,8 +93,8 @@ Over the weekend of March 29–30, we successfully built the core **ExpoComm-B**
 | MAgent Battle training | 🔄 GPU job currently running on NOTS (Job 7966302) |
 | W&B Dashboard | ✅ Live at `wandb.ai/vt20-rice-university/ExpoComm-B` |
 | GitHub Repository | ✅ Pushed to `vt20-crypto/ExpoComm-B` |
-| MPE Environment | ⬜ Not yet started (Ansh's task) |
-| SMACv2 Environment | ⬜ Deferred to AWS ($100 credits available) |
+| MPE Environment | ⬜ Not yet started |
+| SMACv2 Environment | ⬜ Deferred to AWS (Need some credits to do this) |
 | Baseline comparisons | ⬜ Pending MPE wrapper |
 | Final report | ⬜ Not yet started |
 
@@ -97,6 +103,7 @@ Over the weekend of March 29–30, we successfully built the core **ExpoComm-B**
 ## 5. What's Pending & Team Assignments
 
 ### Aneesh (vt20) — Integration Lead
+
 | Task | Priority | When |
 |------|----------|------|
 | Monitor current GPU training run and collect final MAgent results | High | This week |
@@ -105,18 +112,20 @@ Over the weekend of March 29–30, we successfully built the core **ExpoComm-B**
 | Run ExpoComm-B on SMACv2 benchmarks | Medium | After AWS setup |
 
 ### Ansh (ad258) — Baselines & MPE
+
 | Task | Priority | When |
 |------|----------|------|
-| **Read the Knowledge Transfer document** (`ExpoComm-B-Knowledge-Transfer.md`) | 🔴 Critical | Immediately |
-| **Clone the repo** from `github.com/vt20-crypto/ExpoComm-B` | 🔴 Critical | Immediately |
+| **Read the Knowledge Transfer document** (`ExpoComm-B-Knowledge-Transfer.md`) | 🔴 Critical | - |
+| **Clone the repo** from `github.com/vt20-crypto/ExpoComm-B` | 🔴 Critical | - |
 | Set up MPE (Multi-Agent Particle Environment) wrapper for EPyMARL | High | This week |
 | Run the 4-method baseline comparison on MPE (Full-comm, ExpoComm, BVME-only, ExpoComm-B) | High | Week 1–2 |
 | Conduct ablation studies (KL weight λ, compression ratio r) | Medium | Week 2 |
 
 ### Madhu (mt180) — Analysis & Report
+
 | Task | Priority | When |
 |------|----------|------|
-| **Read the Knowledge Transfer document** (`ExpoComm-B-Knowledge-Transfer.md`) | 🔴 Critical | Immediately |
+| **Read the Knowledge Transfer document** (`ExpoComm-B-Knowledge-Transfer.md`) | 🔴 Critical | - |
 | Design scalability experiments (N = 5, 10, 20 agents) | Medium | Week 2 |
 | Run zero-shot generalization tests (train N=5, evaluate N=10) | Medium | Week 2 |
 | Generate publication-quality figures and tables from W&B data | High | Week 2–3 |
@@ -139,4 +148,4 @@ Over the weekend of March 29–30, we successfully built the core **ExpoComm-B**
 
 ---
 
-*This status update covers work completed March 29–31, 2026. Next update will be after MAgent GPU training completes.*
+*This status update covers work completed till March 31, 2026.*
