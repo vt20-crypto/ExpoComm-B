@@ -11,9 +11,14 @@ from .ExpoComm_agent import (
 )
 from .ExpoComm_bvme_agent import ExpoCommBAgent
 
+<<<<<<< HEAD
 REGISTRY["rnn"] = RNNAgent
 REGISTRY["rnn_ns"] = RNNNSAgent
 REGISTRY["rnn_feature"] = RNNFeatureAgent
+=======
+
+REGISTRY["rnn"] = RNNAgent
+>>>>>>> 569053b8d87a46ff7feab748eae93a4960f8fae9
 REGISTRY["ExpoComm_static"] = ExpoCommSAgent
 REGISTRY["ExpoComm_one_peer"] = ExpoCommOAgent
 REGISTRY["ExpoComm_static_cont"] = ExpoCommSContAgent
