@@ -1,0 +1,46 @@
+# --- Ablation: KL weight λ = 0.01 (weak constraint) ---
+# Nearly unregularized BVME — minimal bandwidth constraint.
+# Expected: behaves close to ExpoComm (no compression).
+
+action_selector: "epsilon_greedy"
+epsilon_start: 1.0
+epsilon_finish: 0.05
+epsilon_anneal_time: 50000
+evaluation_epsilon: 0.0
+runner: "episode"
+
+buffer_size: 5000
+batch_size: 32
+target_update_interval_or_tau: 200
+
+mac: "ExpoComm_bvme_mac"
+topk_neighbors: 3
+one_peer: True
+agent: "ExpoComm_bvme"
+obs_agent_id: True
+obs_last_action: True
+obs_individual_obs: False
+
+# --- BVME: λ = 0.01 ---
+bvme_sigma_0: 0.01
+bvme_lambda_kl: 0.01
+bvme_compressed_dim: null
+bvme_log_var_min: -5.0
+bvme_log_var_max: 3.0
+
+agent_output_type: "q"
+learner: "bvme_q_learner"
+aux_coef: 0.1
+standardise_returns: False
+standardise_rewards: True
+double_q: True
+mixer: "qmix"
+use_rnn: True
+mixing_embed_dim: 32
+hypernet_layers: 2
+hypernet_embed: 64
+gamma: 0.99
+lr: 0.0005
+pos_flag: False
+
+name: "ablation_kl_001"
