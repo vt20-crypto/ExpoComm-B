@@ -1,0 +1,18 @@
+# --- MPE Simple Spread (Cooperative Navigation) ---
+# N agents must cooperatively navigate to N landmarks.
+# Standard cooperative MARL benchmark.
+
+env: "MPE_Spread"
+
+env_args:
+  n_agents: 3           # 3 agents, 3 landmarks (standard setting)
+  max_cycles: 25        # standard episode length for MPE
+  continuous_actions: False  # discrete actions for Q-learning
+
+test_greedy: True
+test_nepisode: 100
+test_interval: 10000
+log_interval: 10000
+runner_log_interval: 5000
+learner_log_interval: 5000
+t_max: 2050000           # ~2M timesteps, standard for MPE

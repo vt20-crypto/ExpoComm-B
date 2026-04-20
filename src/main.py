@@ -112,8 +112,16 @@ if __name__ == "__main__":
     alg_config = _get_config(params, "--config", "algs")
     exp_config = _get_config(params, "--exp-config", "exp")
     # config_dict = {**config_dict, **env_config, **alg_config}
-    config_dict = recursive_dict_update(config_dict, env_config)
-    config_dict = recursive_dict_update(config_dict, alg_config)
-    config_dict = recursive_dict_update(config_dict, exp_config)
+    if env_config is not None:
+        config_dict = recursive_dict_update(config_dict, env_config)
+    if alg_config is not None:
+        config_dict = recursive_dict_update(config_dict, alg_config)
+    if exp_config is not None:
+        config_dict = recursive_dict_update(config_dict, exp_config)
+
+    # Ensure required keys have defaults
+    config_dict.setdefault("seed", 0)
+    config_dict.setdefault("exp_name", config_dict.get("name", "default"))
+    config_dict.setdefault("run_name", config_dict.get("name", "default") + "_s0")
 
     main(config_dict)

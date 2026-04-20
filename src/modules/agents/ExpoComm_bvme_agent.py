@@ -61,7 +61,8 @@ class ExpoCommBAgent(nn.Module):
         # --- BVME compression module ---
         # compressed_dim: if bvme_compressed_dim is set, use it; otherwise use hidden_dim
         # (information-theoretic compression only, no dimensional reduction)
-        self.compressed_dim = getattr(args, "bvme_compressed_dim", args.hidden_dim)
+        # Note: YAML null → Python None, so we use `or` to fall back to hidden_dim
+        self.compressed_dim = getattr(args, "bvme_compressed_dim", None) or args.hidden_dim
         self.bvme = BVMEModule(
             input_dim=args.hidden_dim,
             compressed_dim=self.compressed_dim,

@@ -1,0 +1,12 @@
+# Ultra-short smoke test for MPE - just verify the pipeline works  
+exp_name: MPE_smoke
+run_name: MPE_smoke_test
+
+seed: 0
+t_max: 200
+test_interval: 100
+test_nepisode: 2
+log_interval: 100
+runner_log_interval: 100
+learner_log_interval: 100
+save_model: False

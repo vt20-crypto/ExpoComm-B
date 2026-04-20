@@ -1,0 +1,53 @@
+# --- BVME-only baseline for MPE ---
+# BVME variational compression WITHOUT sparse topology.
+# Implementation: ExpoComm-B architecture with topk_neighbors = n_agents
+# (makes exponential topology degenerate to full connectivity).
+# This is scientifically equivalent to BVME over a fully-connected graph.
+
+action_selector: "epsilon_greedy"
+epsilon_start: 1.0
+epsilon_finish: 0.05
+epsilon_anneal_time: 50000
+evaluation_epsilon: 0.0
+runner: "episode"
+
+buffer_size: 5000
+batch_size: 32
+
+target_update_interval_or_tau: 200
+
+# --- ExpoComm-B with FULL connectivity (= BVME-only) ---
+mac: "ExpoComm_bvme_mac"
+topk_neighbors: 3          # = n_agents (full graph for 3 agents)
+one_peer: True              # round-robin over ALL 3 neighbors = full coverage
+agent: "ExpoComm_bvme"
+obs_agent_id: True
+obs_last_action: True
+obs_individual_obs: False
+
+# --- BVME hyperparameters ---
+bvme_sigma_0: 0.01
+bvme_lambda_kl: 1.0
+bvme_compressed_dim: null   # null = same as hidden_dim
+bvme_log_var_min: -5.0
+bvme_log_var_max: 3.0
+
+# --- Training ---
+agent_output_type: "q"
+learner: "bvme_q_learner"
+aux_coef: 0.1
+standardise_returns: False
+standardise_rewards: True
+double_q: True
+mixer: "qmix"
+use_rnn: True
+mixing_embed_dim: 32
+hypernet_layers: 2
+hypernet_embed: 64
+
+gamma: 0.99
+lr: 0.0005
+
+pos_flag: False
+
+name: "bvme_only_mpe"

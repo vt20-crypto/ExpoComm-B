@@ -7,7 +7,14 @@ from .maddpg_ns import MADDPGCriticNS
 from .ac import ACCritic
 from .ac_ns import ACCriticNS
 from .pac_ac_ns import PACCriticNS
-from .pac_dcg_ns import DCGCriticNS
+
+# PAC-DCG requires torch_scatter which may not be available
+try:
+    from .pac_dcg_ns import DCGCriticNS
+    _has_dcg = True
+except ImportError:
+    _has_dcg = False
+
 REGISTRY = {}
 
 REGISTRY["coma_critic"] = COMACritic
@@ -19,6 +26,5 @@ REGISTRY["maddpg_critic_ns"] = MADDPGCriticNS
 REGISTRY["ac_critic"] = ACCritic
 REGISTRY["ac_critic_ns"] = ACCriticNS
 REGISTRY["pac_critic_ns"] = PACCriticNS
-REGISTRY["pac_dcg_critic_ns"] = DCGCriticNS
-
-
+if _has_dcg:
+    REGISTRY["pac_dcg_critic_ns"] = DCGCriticNS
