@@ -10,9 +10,11 @@ env_args:
   continuous_actions: False  # discrete actions for Q-learning
 
 test_greedy: True
-test_nepisode: 100
-test_interval: 10000
-log_interval: 10000
-runner_log_interval: 5000
-learner_log_interval: 5000
-t_max: 2050000           # ~2M timesteps, standard for MPE
+test_nepisode: 32         # reduced from 100 (still statistically robust)
+test_interval: 25000      # evaluate every 25k steps (was 10k)
+log_interval: 25000
+runner_log_interval: 10000
+learner_log_interval: 10000
+t_max: 500000             # 500k steps — converges well for 3-agent MPE
+                          # (your run showed convergence by ~100k steps)
+

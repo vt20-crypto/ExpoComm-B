@@ -1,0 +1,371 @@
+[0;34m══════════════════════════════════════════════[0m
+[0;34m   ExpoComm-B: Full Ablation Study on MPE    [0m
+[0;34m   7 new runs + 1 shared baseline = 8 total  [0m
+[0;34m══════════════════════════════════════════════[0m
+[0;36m╔══════════════════════════════════════════╗[0m
+[0;36m║   Ablation 1: KL Weight λ Sweep          ║[0m
+[0;36m║   λ ∈ {0.01, 0.1, 1.0, 5.0, 10.0}       ║[0m
+[0;36m║   (r = 1.0, σ₀ = 0.01 fixed)            ║[0m
+[0;36m╚══════════════════════════════════════════╝[0m
+
+[0;32m>>> Running: λ = 0.01 (weak)[0m
+    Config:     --config=ablation_kl_001
+    Env:        --env-config=MPE_Spread
+    Experiment: --exp-config=MPE_ablation_kl_001_s0
+wandb: Tracking run with wandb version 0.25.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /Users/anshdabral/Desktop/Ansh/559 ML with graphs/ExpoComm-B/wandb/offline-run-20260420_200606-sbcobyug
+2026-04-20 20:06:06,879 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - WARNING - CUDA flag use_cuda was switched OFF automatically because no CUDA devices are available!
+2026-04-20 20:06:06,880 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Current directory: /Users/anshdabral/Desktop/Ansh/559 ML with graphs/ExpoComm-B.
+2026-04-20 20:06:06,881 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Experiment Parameters:
+2026-04-20 20:06:06,883 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - 
+
+{   'action_selector': 'epsilon_greedy',
+    'add_value_last_step': True,
+    'agent': 'ExpoComm_bvme',
+    'agent_output_type': 'q',
+    'aux_coef': 0.1,
+    'batch_size': 32,
+    'batch_size_run': 1,
+    'buffer_cpu_only': True,
+    'buffer_size': 5000,
+    'bvme_compressed_dim': None,
+    'bvme_lambda_kl': 0.01,
+    'bvme_log_var_max': 3.0,
+    'bvme_log_var_min': -5.0,
+    'bvme_sigma_0': 0.01,
+    'checkpoint_path': '',
+    'double_q': True,
+    'env': 'MPE_Spread',
+    'env_args': {   'continuous_actions': False,
+                    'max_cycles': 25,
+                    'n_agents': 3,
+                    'seed': 0},
+    'epsilon_anneal_time': 50000,
+    'epsilon_finish': 0.05,
+    'epsilon_start': 1.0,
+    'evaluate': False,
+    'evaluation_epsilon': 0.0,
+    'exp_name': 'MPE_ablation',
+    'gamma': 0.99,
+    'grad_norm_clip': 10,
+    'hidden_dim': 64,
+    'hypergroup': None,
+    'hypernet_embed': 64,
+    'hypernet_layers': 2,
+    'label': 'default_label',
+    'learner': 'bvme_q_learner',
+    'learner_log_interval': 10000,
+    'load_step': 0,
+    'local_results_path': 'results',
+    'log_interval': 25000,
+    'lr': 0.0005,
+    'mac': 'ExpoComm_bvme_mac',
+    'mixer': 'qmix',
+    'mixing_embed_dim': 32,
+    'name': 'ablation_kl_001',
+    'obs_agent_id': True,
+    'obs_individual_obs': False,
+    'obs_last_action': True,
+    'one_peer': True,
+    'optim_alpha': 0.99,
+    'optim_eps': 1e-05,
+    'pos_flag': False,
+    'render': False,
+    'repeat_id': 1,
+    'run_name': 'MPE_ablation_kl_001_s0',
+    'runner': 'episode',
+    'runner_log_interval': 10000,
+    'save_model': True,
+    'save_model_interval': 50000,
+    'save_replay': False,
+    'seed': 0,
+    'standardise_returns': False,
+    'standardise_rewards': True,
+    't_max': 500000,
+    'target_update_interval_or_tau': 200,
+    'test_greedy': True,
+    'test_interval': 25000,
+    'test_nepisode': 32,
+    'topk_neighbors': 3,
+    'use_cuda': False,
+    'use_rnn': True,
+    'use_tensorboard': False,
+    'work_dir': 'work_dirs/MPE_ablation/ablation_kl_001/MPE_ablation_kl_001_s0/20260420_200606'}
+
+2026-04-20 20:06:08,795 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Beginning training for 500000 timesteps
+2026-04-20 20:06:08,905 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 25 / 500000
+2026-04-20 20:06:08,905 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 2 seconds. Time passed: 0 seconds
+2026-04-20 20:06:11,697 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Saving models to work_dirs/MPE_ablation/ablation_kl_001/MPE_ablation_kl_001_s0/20260420_200606/models/25
+2026-04-20 20:10:19,556 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:      25000 | Episode:     1000
+aux_loss:                 22.1384	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.6200
+grad_norm:                30.1321	kl_loss:                 1742.9431	loss:                     21.1030	q_loss:                    1.4597
+q_taken_mean:              0.2073	return_mean:             -24.1135	return_std:                3.3509	target_mean:               0.2963
+td_error_abs:              0.9499	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -37.0687
+test_return_std:           0.0000	
+2026-04-20 20:10:19,785 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 25025 / 500000
+2026-04-20 20:10:19,785 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 1 hours, 19 minutes, 26 seconds. Time passed: 4 minutes, 10 seconds
+2026-04-20 20:14:12,813 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:      50000 | Episode:     2000
+aux_loss:                 16.5852	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.2400
+grad_norm:                69.4756	kl_loss:                 1060.3004	loss:                     14.3300	q_loss:                    2.0684
+q_taken_mean:              1.1316	return_mean:             -19.8542	return_std:                2.7761	target_mean:               1.3455
+td_error_abs:              1.1630	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -25.6763
+test_return_std:           0.0000	
+2026-04-20 20:14:13,045 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 50025 / 500000
+2026-04-20 20:14:13,045 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 1 hours, 9 minutes, 58 seconds. Time passed: 8 minutes, 4 seconds
+2026-04-20 20:14:15,306 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Saving models to work_dirs/MPE_ablation/ablation_kl_001/MPE_ablation_kl_001_s0/20260420_200606/models/50025
+2026-04-20 20:18:06,802 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:      75000 | Episode:     3000
+aux_loss:                  5.7360	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                98.9632	kl_loss:                  38.6374	loss:                      3.1261	q_loss:                    2.1662
+q_taken_mean:              3.7668	return_mean:             -11.4473	return_std:                1.1544	target_mean:               4.0446
+td_error_abs:              1.1744	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -20.5543
+test_return_std:           0.0000	
+2026-04-20 20:18:07,031 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 75025 / 500000
+2026-04-20 20:18:07,032 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 1 hours, 6 minutes, 17 seconds. Time passed: 11 minutes, 58 seconds
+2026-04-20 20:22:00,164 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     100000 | Episode:     4000
+aux_loss:                  3.7403	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                66.5423	kl_loss:                  39.6302	loss:                      1.9926	q_loss:                    1.2223
+q_taken_mean:              4.8223	return_mean:              -9.7342	return_std:                0.5350	target_mean:               4.9747
+td_error_abs:              0.8374	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -17.7477
+test_return_std:           0.0000	
+2026-04-20 20:22:00,402 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 100025 / 500000
+2026-04-20 20:22:00,402 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 1 hours, 2 minutes, 13 seconds. Time passed: 15 minutes, 51 seconds
+2026-04-20 20:22:02,670 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Saving models to work_dirs/MPE_ablation/ablation_kl_001/MPE_ablation_kl_001_s0/20260420_200606/models/100025
+2026-04-20 20:25:55,691 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     125000 | Episode:     5000
+aux_loss:                  3.0238	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                35.0706	kl_loss:                  38.5722	loss:                      1.2502	q_loss:                    0.5621
+q_taken_mean:              5.0661	return_mean:              -9.3543	return_std:                0.3428	target_mean:               5.1023
+td_error_abs:              0.5730	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -16.0801
+test_return_std:           0.0000	
+2026-04-20 20:25:55,931 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 125025 / 500000
+2026-04-20 20:25:55,931 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 58 minutes, 52 seconds. Time passed: 19 minutes, 47 seconds
+2026-04-20 20:30:11,851 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     150000 | Episode:     6000
+aux_loss:                  2.6411	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                32.3632	kl_loss:                  38.2355	loss:                      1.1390	q_loss:                    0.4925
+q_taken_mean:              5.0295	return_mean:              -9.6935	return_std:                0.4088	target_mean:               5.0033
+td_error_abs:              0.5111	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -10.4925
+test_return_std:           0.0000	
+2026-04-20 20:30:12,134 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 150025 / 500000
+2026-04-20 20:30:12,134 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 59 minutes, 46 seconds. Time passed: 24 minutes, 3 seconds
+2026-04-20 20:30:14,789 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Saving models to work_dirs/MPE_ablation/ablation_kl_001/MPE_ablation_kl_001_s0/20260420_200606/models/150025
+2026-04-20 20:34:34,577 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     175000 | Episode:     7000
+aux_loss:                  1.9671	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                36.7861	kl_loss:                  37.9231	loss:                      0.9845	q_loss:                    0.4085
+q_taken_mean:              4.9910	return_mean:             -10.4886	return_std:                0.6223	target_mean:               4.9176
+td_error_abs:              0.4773	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:         -9.8406
+test_return_std:           0.0000	
+2026-04-20 20:34:34,835 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 175025 / 500000
+2026-04-20 20:34:34,836 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 56 minutes, 54 seconds. Time passed: 28 minutes, 26 seconds
+2026-04-20 20:38:56,250 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     200000 | Episode:     8000
+aux_loss:                  1.6277	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                26.6768	kl_loss:                  37.5470	loss:                      0.8509	q_loss:                    0.3126
+q_taken_mean:              4.8007	return_mean:             -10.2175	return_std:                0.5803	target_mean:               4.7390
+td_error_abs:              0.4210	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:         -9.6261
+test_return_std:           0.0000	
+2026-04-20 20:38:56,508 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 200025 / 500000
+2026-04-20 20:38:56,508 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 52 minutes, 19 seconds. Time passed: 32 minutes, 47 seconds
+2026-04-20 20:38:59,105 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Saving models to work_dirs/MPE_ablation/ablation_kl_001/MPE_ablation_kl_001_s0/20260420_200606/models/200025
+2026-04-20 20:43:16,772 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     225000 | Episode:     9000
+aux_loss:                  1.3875	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                16.2143	kl_loss:                  36.7115	loss:                      0.6550	q_loss:                    0.1492
+q_taken_mean:              4.4192	return_mean:              -9.1128	return_std:                0.3371	target_mean:               4.3801
+td_error_abs:              0.2896	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:         -9.5039
+test_return_std:           0.0000	
+2026-04-20 20:43:17,021 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 225025 / 500000
+2026-04-20 20:43:17,021 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 47 minutes, 45 seconds. Time passed: 37 minutes, 8 seconds
+2026-04-20 20:47:45,829 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     250000 | Episode:    10000
+aux_loss:                  1.2715	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                18.5631	kl_loss:                  36.5111	loss:                      0.6205	q_loss:                    0.1283
+q_taken_mean:              4.2075	return_mean:              -8.9040	return_std:                0.2879	target_mean:               4.1623
+td_error_abs:              0.2761	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:         -9.3477
+test_return_std:           0.0000	
+2026-04-20 20:47:46,085 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 250025 / 500000
+2026-04-20 20:47:46,086 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 44 minutes, 50 seconds. Time passed: 41 minutes, 37 seconds
+2026-04-20 20:47:48,560 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Saving models to work_dirs/MPE_ablation/ablation_kl_001/MPE_ablation_kl_001_s0/20260420_200606/models/250025
+2026-04-20 20:52:11,796 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     275000 | Episode:    11000
+aux_loss:                  1.2403	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                18.3126	kl_loss:                  36.8844	loss:                      0.6748	q_loss:                    0.1820
+q_taken_mean:              3.8303	return_mean:              -8.8310	return_std:                0.3183	target_mean:               3.7930
+td_error_abs:              0.3229	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:         -9.2387
+test_return_std:           0.0000	
+2026-04-20 20:52:12,046 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 275025 / 500000
+2026-04-20 20:52:12,047 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 39 minutes, 53 seconds. Time passed: 46 minutes, 3 seconds
+2026-04-20 20:56:39,837 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     300000 | Episode:    12000
+aux_loss:                  1.2820	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                15.6219	kl_loss:                  37.1300	loss:                      0.7207	q_loss:                    0.2212
+q_taken_mean:              3.6587	return_mean:              -8.8878	return_std:                0.3438	target_mean:               3.6537
+td_error_abs:              0.3472	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:         -8.7985
+test_return_std:           0.0000	
+2026-04-20 20:56:40,121 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 300025 / 500000
+2026-04-20 20:56:40,121 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 35 minutes, 44 seconds. Time passed: 50 minutes, 31 seconds
+2026-04-20 20:56:42,959 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Saving models to work_dirs/MPE_ablation/ablation_kl_001/MPE_ablation_kl_001_s0/20260420_200606/models/300025
+2026-04-20 21:01:12,792 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     325000 | Episode:    13000
+aux_loss:                  1.1853	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                20.3221	kl_loss:                  37.2623	loss:                      0.8187	q_loss:                    0.3276
+q_taken_mean:              3.7913	return_mean:              -9.0458	return_std:                0.3637	target_mean:               3.8282
+td_error_abs:              0.4201	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:         -8.7702
+test_return_std:           0.0000	
+2026-04-20 21:01:13,217 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 325025 / 500000
+2026-04-20 21:01:13,217 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 31 minutes, 51 seconds. Time passed: 55 minutes, 4 seconds
+2026-04-20 21:05:33,429 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     350000 | Episode:    14000
+aux_loss:                  1.1290	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                25.8932	kl_loss:                  37.3731	loss:                      0.8280	q_loss:                    0.3414
+q_taken_mean:              3.8887	return_mean:              -8.9452	return_std:                0.3518	target_mean:               3.8838
+td_error_abs:              0.4232	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:         -8.7259
+test_return_std:           0.0000	
+2026-04-20 21:05:33,690 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 350025 / 500000
+2026-04-20 21:05:33,691 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 26 minutes, 2 seconds. Time passed: 59 minutes, 24 seconds
+2026-04-20 21:05:36,724 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Saving models to work_dirs/MPE_ablation/ablation_kl_001/MPE_ablation_kl_001_s0/20260420_200606/models/350025
+2026-04-20 21:09:55,860 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     375000 | Episode:    15000
+aux_loss:                  1.2013	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                22.5464	kl_loss:                  37.9541	loss:                      0.7204	q_loss:                    0.2207
+q_taken_mean:              3.6130	return_mean:              -8.7492	return_std:                0.3080	target_mean:               3.5450
+td_error_abs:              0.3101	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:         -8.6728
+test_return_std:           0.0000	
+2026-04-20 21:09:56,125 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 375025 / 500000
+2026-04-20 21:09:56,125 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 21 minutes, 51 seconds. Time passed: 1 hours, 3 minutes, 47 seconds
+2026-04-20 21:14:18,591 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     400000 | Episode:    16000
+aux_loss:                  1.3075	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                15.0320	kl_loss:                  38.8443	loss:                      0.6407	q_loss:                    0.1215
+q_taken_mean:              3.4066	return_mean:              -8.8689	return_std:                0.2965	target_mean:               3.3624
+td_error_abs:              0.2196	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:         -8.7793
+test_return_std:           0.0000	
+2026-04-20 21:14:18,884 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 400025 / 500000
+2026-04-20 21:14:18,885 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 17 minutes, 30 seconds. Time passed: 1 hours, 8 minutes, 10 seconds
+2026-04-20 21:14:21,723 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Saving models to work_dirs/MPE_ablation/ablation_kl_001/MPE_ablation_kl_001_s0/20260420_200606/models/400025
+2026-04-20 21:18:41,398 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     425000 | Episode:    17000
+aux_loss:                  1.3228	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                 9.7425	kl_loss:                  40.0967	loss:                      0.5781	q_loss:                    0.0448
+q_taken_mean:              3.2861	return_mean:              -8.7468	return_std:                0.2746	target_mean:               3.2576
+td_error_abs:              0.1600	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:         -8.6910
+test_return_std:           0.0000	
+2026-04-20 21:18:41,662 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 425025 / 500000
+2026-04-20 21:18:41,663 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 13 minutes, 8 seconds. Time passed: 1 hours, 12 minutes, 32 seconds
+2026-04-20 21:23:01,850 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     450000 | Episode:    18000
+aux_loss:                  1.2499	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                 8.3894	kl_loss:                  40.2306	loss:                      0.5689	q_loss:                    0.0416
+q_taken_mean:              3.1536	return_mean:              -8.5442	return_std:                0.2507	target_mean:               3.1225
+td_error_abs:              0.1478	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:         -8.5735
+test_return_std:           0.0000	
+2026-04-20 21:23:02,115 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 450025 / 500000
+2026-04-20 21:23:02,116 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 8 minutes, 40 seconds. Time passed: 1 hours, 16 minutes, 53 seconds
+2026-04-20 21:23:04,738 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Saving models to work_dirs/MPE_ablation/ablation_kl_001/MPE_ablation_kl_001_s0/20260420_200606/models/450025
+2026-04-20 21:27:25,350 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     475000 | Episode:    19000
+aux_loss:                  1.1999	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                 4.4813	kl_loss:                  40.2171	loss:                      0.5452	q_loss:                    0.0230
+q_taken_mean:              2.9847	return_mean:              -8.4616	return_std:                0.2722	target_mean:               2.9686
+td_error_abs:              0.0972	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:         -8.5385
+test_return_std:           0.0000	
+2026-04-20 21:27:25,613 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 475025 / 500000
+2026-04-20 21:27:25,614 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: 4 minutes, 23 seconds. Time passed: 1 hours, 21 minutes, 16 seconds
+2026-04-20 21:31:51,112 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Recent Stats | t_env:     500000 | Episode:    20000
+aux_loss:                  1.1457	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                 2.8109	kl_loss:                  40.2710	loss:                      0.5312	q_loss:                    0.0139
+q_taken_mean:              2.9368	return_mean:              -8.4018	return_std:                0.2794	target_mean:               2.9274
+td_error_abs:              0.0762	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:         -8.5074
+test_return_std:           0.0000	
+2026-04-20 21:31:51,353 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - t_env: 500025 / 500000
+2026-04-20 21:31:51,354 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Estimated time left: -. Time passed: 1 hours, 25 minutes, 42 seconds
+2026-04-20 21:31:53,794 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Saving models to work_dirs/MPE_ablation/ablation_kl_001/MPE_ablation_kl_001_s0/20260420_200606/models/500025
+2026-04-20 21:31:53,911 - MPE_ablation - ablation_kl_001 - MPE_ablation_kl_001_s0 - INFO - Finished Training
+Exiting Main
+Stopping all threads
+Thread wandb-AsyncioManager-main is alive! Is daemon: True
+Thread joined
+Exiting script
+[1;34mwandb[0m: 
+[1;34mwandb[0m: You can sync this run to the cloud by running:
+[1;34mwandb[0m: [1mwandb sync /Users/anshdabral/Desktop/Ansh/559 ML with graphs/ExpoComm-B/wandb/offline-run-20260420_200606-sbcobyug[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/offline-run-20260420_200606-sbcobyug/logs[0m
+[0;32m>>> Finished: λ = 0.01 (weak)[0m
+
+
+[0;32m>>> Running: λ = 0.1[0m
+    Config:     --config=ablation_kl_01
+    Env:        --env-config=MPE_Spread
+    Experiment: --exp-config=MPE_ablation_kl_01_s0
+wandb: Tracking run with wandb version 0.25.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /Users/anshdabral/Desktop/Ansh/559 ML with graphs/ExpoComm-B/wandb/offline-run-20260420_213159-m4o37daz
+2026-04-20 21:31:59,833 - MPE_ablation - ablation_kl_01 - MPE_ablation_kl_01_s0 - WARNING - CUDA flag use_cuda was switched OFF automatically because no CUDA devices are available!
+2026-04-20 21:31:59,834 - MPE_ablation - ablation_kl_01 - MPE_ablation_kl_01_s0 - INFO - Current directory: /Users/anshdabral/Desktop/Ansh/559 ML with graphs/ExpoComm-B.
+2026-04-20 21:31:59,834 - MPE_ablation - ablation_kl_01 - MPE_ablation_kl_01_s0 - INFO - Experiment Parameters:
+2026-04-20 21:31:59,836 - MPE_ablation - ablation_kl_01 - MPE_ablation_kl_01_s0 - INFO - 
+
+{   'action_selector': 'epsilon_greedy',
+    'add_value_last_step': True,
+    'agent': 'ExpoComm_bvme',
+    'agent_output_type': 'q',
+    'aux_coef': 0.1,
+    'batch_size': 32,
+    'batch_size_run': 1,
+    'buffer_cpu_only': True,
+    'buffer_size': 5000,
+    'bvme_compressed_dim': None,
+    'bvme_lambda_kl': 0.1,
+    'bvme_log_var_max': 3.0,
+    'bvme_log_var_min': -5.0,
+    'bvme_sigma_0': 0.01,
+    'checkpoint_path': '',
+    'double_q': True,
+    'env': 'MPE_Spread',
+    'env_args': {   'continuous_actions': False,
+                    'max_cycles': 25,
+                    'n_agents': 3,
+                    'seed': 0},
+    'epsilon_anneal_time': 50000,
+    'epsilon_finish': 0.05,
+    'epsilon_start': 1.0,
+    'evaluate': False,
+    'evaluation_epsilon': 0.0,
+    'exp_name': 'MPE_ablation',
+    'gamma': 0.99,
+    'grad_norm_clip': 10,
+    'hidden_dim': 64,
+    'hypergroup': None,
+    'hypernet_embed': 64,
+    'hypernet_layers': 2,
+    'label': 'default_label',
+    'learner': 'bvme_q_learner',
+    'learner_log_interval': 10000,
+    'load_step': 0,
+    'local_results_path': 'results',
+    'log_interval': 25000,
+    'lr': 0.0005,
+    'mac': 'ExpoComm_bvme_mac',
+    'mixer': 'qmix',
+    'mixing_embed_dim': 32,
+    'name': 'ablation_kl_01',
+    'obs_agent_id': True,
+    'obs_individual_obs': False,
+    'obs_last_action': True,
+    'one_peer': True,
+    'optim_alpha': 0.99,
+    'optim_eps': 1e-05,
+    'pos_flag': False,
+    'render': False,
+    'repeat_id': 1,
+    'run_name': 'MPE_ablation_kl_01_s0',
+    'runner': 'episode',
+    'runner_log_interval': 10000,
+    'save_model': True,
+    'save_model_interval': 50000,
+    'save_replay': False,
+    'seed': 0,
+    'standardise_returns': False,
+    'standardise_rewards': True,
+    't_max': 500000,
+    'target_update_interval_or_tau': 200,
+    'test_greedy': True,
+    'test_interval': 25000,
+    'test_nepisode': 32,
+    'topk_neighbors': 3,
+    'use_cuda': False,
+    'use_rnn': True,
+    'use_tensorboard': False,
+    'work_dir': 'work_dirs/MPE_ablation/ablation_kl_01/MPE_ablation_kl_01_s0/20260420_213159'}
+
+2026-04-20 21:32:01,633 - MPE_ablation - ablation_kl_01 - MPE_ablation_kl_01_s0 - INFO - Beginning training for 500000 timesteps
+2026-04-20 21:32:01,745 - MPE_ablation - ablation_kl_01 - MPE_ablation_kl_01_s0 - INFO - t_env: 25 / 500000
+2026-04-20 21:32:01,746 - MPE_ablation - ablation_kl_01 - MPE_ablation_kl_01_s0 - INFO - Estimated time left: 2 seconds. Time passed: 0 seconds
+2026-04-20 21:32:04,383 - MPE_ablation - ablation_kl_01 - MPE_ablation_kl_01_s0 - INFO - Saving models to work_dirs/MPE_ablation/ablation_kl_01/MPE_ablation_kl_01_s0/20260420_213159/models/25
