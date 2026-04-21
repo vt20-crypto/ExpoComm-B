@@ -58,16 +58,16 @@ The ExpoComm-B architecture has been fully implemented and tested on the MAgent 
 
 ## 4. Pending Work — Team Assignments
 
-### Ansh (ad258) — MPE Experiments
+### Ansh (ad258) — MPE Experiments — Status: COMPLETE ✅
 
-| Task | Priority | Details |
-|------|----------|---------|
-| Read Knowledge Transfer doc | 🔴 Critical | `ExpoComm-B-Knowledge-Transfer.md` in repo |
-| Clone repo | 🔴 Critical | `github.com/vt20-crypto/ExpoComm-B` |
-| Build MPE wrapper for EPyMARL | High | Create `src/envs/mpe_wrappers.py` + `src/config/envs/MPE_Tag.yaml` |
-| Run 4-method comparison on MPE | High | Use existing configs: `QMIX_baseline`, `ExpoComm_qmix`, `ExpoComm_B_qmix` |
-| Run bandwidth ablation on MPE | Medium | Use `ExpoComm_B_qmix_s005/s02/s05` configs |
-| Use `run_experiment.slurm` for submissions | — | `sbatch run_experiment.slurm <config> <run_name>` |
+| Task | Priority | Details | Status |
+|------|----------|---------|--------|
+| Read Knowledge Transfer doc | 🔴 Critical | `ExpoComm-B-Knowledge-Transfer.md` in repo | ✅ Done |
+| Clone repo | 🔴 Critical | `github.com/vt20-crypto/ExpoComm-B` | ✅ Done |
+| Build MPE wrapper for EPyMARL | High | Create `src/envs/mpe_wrappers.py` + `src/config/envs/MPE_Tag.yaml` | ✅ Done |
+| Run 4-method comparison on MPE | High | Use existing configs: `QMIX_baseline`, `ExpoComm_qmix`, `ExpoComm_B_qmix` | ✅ Done |
+| Run bandwidth ablation on MPE | Medium | KL Sweep & Compression Ratio sweep across MPE | ✅ Done |
+| Use `run_experiment.slurm` for submissions | — | `sbatch run_experiment.slurm <config> <run_name>` | ✅ Done |
 
 ### Madhu (mt180) — Analysis & Report
 
