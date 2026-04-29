@@ -145,9 +145,13 @@ class MPEWrapper(MultiAgentEnv):
                 action_dict[agent] = int(actions[i])
 
         # Step the environment
-        obs_dict, rew_dict, terminated_dict, truncated_dict, info_dict = self._env.step(
-            action_dict
-        )
+        # PettingZoo >= 1.22 returns 5 values; older versions return 4
+        step_result = self._env.step(action_dict)
+        if len(step_result) == 5:
+            obs_dict, rew_dict, terminated_dict, truncated_dict, info_dict = step_result
+        else:
+            obs_dict, rew_dict, terminated_dict, info_dict = step_result
+            truncated_dict = {}
 
         self._episode_steps += 1
 
