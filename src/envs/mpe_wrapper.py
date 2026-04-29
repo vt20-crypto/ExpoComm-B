@@ -85,7 +85,10 @@ class MPEWrapper(MultiAgentEnv):
         self.agents = self._env.possible_agents
 
         # Initialize to get space info
-        self._env.reset(seed=self.seed_val)  # returns (obs, infos) tuple
+        try:
+            self._env.reset(seed=self.seed_val)
+        except TypeError:
+            self._env.reset()
 
         # Get observation and action space info from first agent
         # (all agents have identical spaces in simple_spread)
@@ -104,7 +107,10 @@ class MPEWrapper(MultiAgentEnv):
 
     def reset(self):
         """Reset the environment and return initial observations and state."""
-        result = self._env.reset(seed=self.seed_val)
+        try:
+            result = self._env.reset(seed=self.seed_val)
+        except TypeError:
+            result = self._env.reset()
         # PettingZoo >= 1.22 returns (obs, infos) tuple
         if isinstance(result, tuple):
             obs_dict, _ = result
