@@ -1,80 +1,120 @@
-# ExpoComm-B: MAgent Battle Experiment Results
+# ExpoComm-B: Complete Experiment Results
 
-**Environment**: MAgent Battle (45×45 grid, 81 blue agents vs 81 pretrained red agents)  
-**Max Episode Steps**: 200  
-**Training Target**: 5,050,000 timesteps  
-**Date**: April 4–7, 2026
+**Last Updated**: April 29, 2026  
 
 ---
 
-## 1. Raw Results
+## 1. MAgent Battle Results (81 blue vs 81 pretrained red agents)
 
-All experiments were run on Rice NOTS GPU nodes (`commons` partition, 24h limit). None completed the full 5.05M steps due to the time limit, but all ran for 76–98% of the target.
+**Environment**: MAgent Battle, 45×45 grid, max 200 steps, seed=123  
+**Compute**: Rice NOTS GPU cluster (commons partition, 24h limit)  
+**Target**: 5,050,000 timesteps (none fully completed due to time limit)
 
 ### Baseline Comparison
 
-| Method | Config | Steps Reached | % Complete | Test Win Rate | Test Return | Test Enemy Survivors | Test Ep Length |
-|--------|--------|:---:|:---:|:---:|:---:|:---:|:---:|
-| QMIX (no comm) | `QMIX_baseline` | 4,950,662 | 98% | 100% | -0.998 | 72.4 | 200 |
-| ExpoComm (sparse, no compress) | `ExpoComm_qmix` | 4,353,243 | 86% | 100% | -0.894 | 60.6 | 200 |
-| ExpoComm-B (σ₀=0.01) | `ExpoComm_B_qmix` | 3,354,276 | 66% | 100% | -0.853 | 50.6 | 200 |
+| Method | Config | Steps | % Done | Test Win Rate | Test Enemy Survivors ↓ | Test Return ↑ |
+|--------|--------|:---:|:---:|:---:|:---:|:---:|
+| QMIX (no comm) | `QMIX_baseline` | 4.95M | 98% | 100% | 72.4 / 81 | -0.998 |
+| ExpoComm (sparse, no compress) | `ExpoComm_qmix` | 4.35M | 86% | 100% | 60.6 / 81 | -0.894 |
+| ExpoComm-B (σ₀=0.01) | `ExpoComm_B_qmix` | 3.35M | 66% | 100% | 50.6 / 81 | -0.853 |
 
-### Bandwidth Ablation (σ₀ sweep)
+### σ₀ Ablation (MAgent)
 
-| σ₀ | Compression Level | Steps Reached | Test Win Rate | Test Return | Test Enemy Survivors | Test Ep Length | KL Loss |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| 0.005 | High | 3,854,690 (76%) | 100% | -0.980 | 70.4 | 200 | 131.5 |
-| 0.01 | Medium-High | 3,354,276 (66%) | 100% | -0.853 | 50.6 | 200 | 31.1 |
-| 0.02 | Medium | 4,053,243 (80%) | 100% | -0.883 | 64.5 | 200 | 6.5 |
-| 0.05 | Low | 4,456,919 (88%) | 100% | -0.407 | 3.6 | 145 | 0.35 |
+| σ₀ | Steps | Test Win Rate | Test Enemy Survivors ↓ | Test Return ↑ | KL Loss |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| 0.005 (tight) | 3.85M (76%) | 100% | 70.4 | -0.980 | 131.5 |
+| 0.01 | 3.35M (66%) | 100% | 50.6 | -0.853 | 31.1 |
+| 0.02 | 4.05M (80%) | 100% | 64.5 | -0.883 | 6.5 |
+| 0.05 (loose) | 4.46M (88%) | 100% | 3.6 | -0.407 | 0.35 |
 
----
-
-## 2. Observations (From Data Only)
-
-### Baseline Comparison
-- All three methods achieve a 100% test win rate. The win rate alone does not differentiate them.
-- The differentiating metric is `test_red_team_alives_mean` (how many enemies survive at episode end). Lower = more enemies killed = better coordination.
-- **QMIX** (no communication): 72.4 enemies survive out of 81. Agents win but kill very few opponents.
-- **ExpoComm** (sparse topology, no compression): 60.6 enemies survive. Adding the exponential communication topology reduces enemy survivors by 11.8 compared to QMIX.
-- **ExpoComm-B σ₀=0.01** (sparse topology + BVME): 50.6 enemies survive. Adding BVME compression further reduces enemy survivors by 10.0 compared to plain ExpoComm.
-
-### Bandwidth Ablation
-- **σ₀=0.005** (tightest compression): 70.4 enemies survive for ExpoComm-B, which is close to the QMIX baseline (72.4). KL loss is very high (131.5), indicating the bottleneck is heavily restricting information flow. This variant performed worst among all ExpoComm-B settings.
-- **σ₀=0.01**: 50.6 enemies — better than both baselines.
-- **σ₀=0.02**: 64.5 enemies — worse than σ₀=0.01, better than σ₀=0.005.
-- **σ₀=0.05** (loosest compression): 3.6 enemies survive. This is the best result across all experiments by a wide margin. KL loss is only 0.35. Episodes end at step 145 on average instead of 200, meaning the blue team eliminates nearly all enemies before time runs out.
-
-### Additional Training Metrics
-- **aux_loss** (state prediction from messages) decreases as σ₀ increases: 1.77 (σ₀=0.005) → 1.44 (0.02) → 1.03 (0.05). This indicates messages carry more useful state information at lower compression levels.
-- **grad_norm** is highest for σ₀=0.005 (7.8) and lowest for ExpoComm baseline (0.45). High KL loss from aggressive compression may cause gradient instability.
+**Caveats**: Single seed (123). No run completed full 5.05M steps. Different runs reached different step counts.
 
 ---
 
-## 3. Caveats
+## 2. MPE Simple Spread Results (3 agents, cooperative navigation)
 
-1. **No run completed 5.05M steps.** The QMIX baseline got closest (98%). ExpoComm-B σ₀=0.01 only reached 66%. Results may not reflect fully converged performance.
-2. **Single seed.** All experiments used seed=123. Results may vary across seeds. Standard practice requires 3–5 seeds for statistical significance.
-3. **One environment only.** All results are on MAgent Battle. Generalization to MPE or SMACv2 has not been tested.
-4. **Non-uniform training progress.** Different methods reached different step counts, making direct comparison imperfect. The QMIX baseline had ~30% more training than ExpoComm-B σ₀=0.01.
+**Environment**: MPE simple_spread_v3, 3 agents, 25 steps/episode, seed=0  
+**Compute**: NOTS CPU (ad258 account) + Ansh's local Mac  
+**Target**: 500,000 timesteps — **all runs completed (500K/500K)**
+
+### 4-Method Baseline Comparison
+
+> **⚠️ DATA GAP**: The MPE baseline results for QMIX, ExpoComm, and BVME-only were NOT committed to the repo as log files. Ansh marked them as complete in `STATUS_UPDATE.md` but the raw output logs are missing. We only have the ExpoComm-B baseline (λ=1.0) result from the ablation log. Ansh needs to provide these numbers or re-run.
+
+| Method | Config | Final test_return_mean | Source |
+|--------|--------|:---:|---|
+| QMIX (full-comm, no topology) | `qmix_fullcomm_mpe` | **Missing** | Log not in repo |
+| ExpoComm (sparse, no compress) | `ExpoComm_mpe` | **Missing** | Log not in repo |
+| BVME-only (full graph + compress) | `bvme_only_mpe` | **Missing** | Log not in repo |
+| ExpoComm-B (ours) | `ExpoComm_B_mpe` | **-8.160** | `ablation_nots.log` |
+
+### KL Weight Ablation (λ sweep) — ALL COMPLETE ✅
+
+All runs completed 500K steps. σ₀ = 0.01, compressed_dim = 64 (no dimensional reduction), seed = 0.
+
+| λ (KL weight) | Final test_return_mean ↑ | KL Loss | Source |
+|:---:|:---:|:---:|---|
+| 0.01 (weak) | **-8.507** | 40.27 | `ablation_output.log` (Ansh's Mac) |
+| 0.1 | **-8.163** | 31.09 | `ablation_nots.log` |
+| 1.0 (default) | **-8.160** | 31.09 | `ablation_nots.log` |
+| 5.0 | **-8.555** | 31.09 | `ablation_nots.log` |
+| 10.0 | **-8.138** | 31.09 | `ablation_nots.log` |
+
+### Compression Ratio Ablation (dim sweep) — ALL COMPLETE ✅
+
+All runs completed 500K steps. λ = 1.0, σ₀ = 0.01, seed = 0.
+
+| Compression Ratio | compressed_dim | Final test_return_mean ↑ | Source |
+|:---:|:---:|:---:|---|
+| 1.0 (no reduction) | 64 | **-8.160** | `ablation_nots.log` |
+| 0.5 | 32 | **-8.205** | `ablation_nots.log` |
+| 0.25 | 16 | **-8.163** | `ablation_nots.log` |
+| 0.125 | 8 | **-8.219** | `ablation_nots.log` |
 
 ---
 
-## 4. Saved Checkpoints
+## 3. Observations (from data only)
 
-All final model checkpoints are saved in `~/ExpoComm/saved_models/` on NOTS:
+### MAgent Battle
+- All methods achieve 100% win rate — not a differentiating metric.
+- Key metric is enemy survivors. QMIX: 72.4, ExpoComm: 60.6, ExpoComm-B σ₀=0.01: 50.6.
+- σ₀=0.05 has dramatically fewer survivors (3.6) and shorter episodes (145 steps).
+- σ₀=0.005 performs close to the QMIX baseline (70.4 vs 72.4).
 
-| Experiment | Checkpoint Step | Location |
-|-----------|:---:|----------|
-| QMIX Baseline | 4,950,662 | `saved_models/QMIX_baseline/4950662/` |
-| ExpoComm | 4,353,243 | `saved_models/ExpoComm_qmix/4353243/` |
-| ExpoComm-B σ₀=0.01 | 3,354,276 | `saved_models/MAgent_Battle_GPU_Run/3354276/` |
-| ExpoComm-B σ₀=0.005 | 3,804,690 | `saved_models/ExpoComm_B_s005/3804690/` |
-| ExpoComm-B σ₀=0.02 | 4,053,243 | `saved_models/ExpoComm_B_s02/4053243/` |
-| ExpoComm-B σ₀=0.05 | 4,456,919 | `saved_models/ExpoComm_B_s05/4456919/` |
+### MPE KL Ablation
+- λ = 10.0 achieved the best test_return_mean (-8.138), slightly better than λ = 1.0 (-8.160).
+- λ = 0.01 performed worst (-8.507).
+- λ = 5.0 also performed poorly (-8.555).
+- The range across all λ values is narrow: -8.138 to -8.555 (Δ = 0.417).
+
+### MPE Compression Ratio Ablation
+- All compression ratios achieved similar performance: -8.160 to -8.219.
+- The range is extremely narrow (Δ = 0.059), suggesting that for 3-agent MPE, dimensional compression has minimal impact.
+- Even 87.5% compression (64→8 dims) only reduced performance by 0.059.
 
 ---
 
-## 5. W&B Dashboard
+## 4. Data Gaps — Action Required
 
-All runs are logged at: `wandb.ai/vt20-rice-university/ExpoComm-B`
+| Gap | Owner | Action |
+|-----|-------|--------|
+| MPE 4-method baseline results (QMIX, ExpoComm, BVME-only) | Ansh | Provide log files or final test_return_mean numbers |
+| Multi-seed runs | All | Not done — single seed only |
+| Scalability experiments | Madhu | Not started |
+
+---
+
+## 5. Saved Checkpoints
+
+### MAgent (on NOTS ~/ExpoComm/saved_models/)
+| Experiment | Checkpoint |
+|-----------|:---:|
+| QMIX Baseline | `QMIX_baseline/4950662/` |
+| ExpoComm | `ExpoComm_qmix/4353243/` |
+| ExpoComm-B σ₀=0.01 | `MAgent_Battle_GPU_Run/3354276/` |
+| ExpoComm-B σ₀=0.005 | `ExpoComm_B_s005/3804690/` |
+| ExpoComm-B σ₀=0.02 | `ExpoComm_B_s02/4053243/` |
+| ExpoComm-B σ₀=0.05 | `ExpoComm_B_s05/4456919/` |
+
+### MPE (on NOTS /home/ad258/ExpoComm-B/work_dirs/)
+All MPE checkpoints are on Ansh's NOTS account.
