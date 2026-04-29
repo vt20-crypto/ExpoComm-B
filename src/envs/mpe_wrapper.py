@@ -173,7 +173,7 @@ class MPEWrapper(MultiAgentEnv):
 
         # Check if episode is done
         done = all(
-            terminated_dict.get(agent, True) or truncated_dict.get(agent, True)
+            terminated_dict.get(agent, False) or truncated_dict.get(agent, False)
             for agent in self.agents
         )
 
