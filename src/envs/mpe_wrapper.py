@@ -53,7 +53,7 @@ class MPEWrapper(MultiAgentEnv):
 
         # Import PettingZoo MPE here to keep it optional
         try:
-            from pettingzoo.mpe import simple_spread_v3
+            from pettingzoo.mpe import simple_spread_v2 as simple_spread_v3
         except ImportError:
             raise ImportError(
                 "PettingZoo MPE not found. Install with:\n"
@@ -63,12 +63,20 @@ class MPEWrapper(MultiAgentEnv):
             )
 
         # Create the parallel environment
-        self._env = simple_spread_v3.parallel_env(
-            N=self.n_agents_requested,
-            max_cycles=self.max_cycles,
-            continuous_actions=self.continuous_actions,
-            render_mode=None,
-        )
+        try:
+            self._env = simple_spread_v3.parallel_env(
+                N=self.n_agents_requested,
+                max_cycles=self.max_cycles,
+                continuous_actions=self.continuous_actions,
+                render_mode=None,
+            )
+        except TypeError:
+            # Older PettingZoo (<=1.14) doesn't support render_mode
+            self._env = simple_spread_v3.parallel_env(
+                N=self.n_agents_requested,
+                max_cycles=self.max_cycles,
+                continuous_actions=self.continuous_actions,
+            )
 
         self.episode_limit = self.max_cycles
         self.n_agents = self.n_agents_requested
