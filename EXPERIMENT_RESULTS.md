@@ -39,7 +39,6 @@
 
 ### 4-Method Baseline Comparison
 
-> **⚠️ DATA GAP**: The MPE baseline results for QMIX, ExpoComm, and BVME-only were NOT committed to the repo as log files. Ansh marked them as complete in `STATUS_UPDATE.md` but the raw output logs are missing. We only have the ExpoComm-B baseline (λ=1.0) result from the ablation log. Ansh needs to provide these numbers or re-run.
 
 | Method | Config | Final test_return_mean ↑ | Source |
 |--------|--------|:---:|---|
