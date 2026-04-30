@@ -41,11 +41,11 @@
 
 > **⚠️ DATA GAP**: The MPE baseline results for QMIX, ExpoComm, and BVME-only were NOT committed to the repo as log files. Ansh marked them as complete in `STATUS_UPDATE.md` but the raw output logs are missing. We only have the ExpoComm-B baseline (λ=1.0) result from the ablation log. Ansh needs to provide these numbers or re-run.
 
-| Method | Config | Final test_return_mean | Source |
+| Method | Config | Final test_return_mean ↑ | Source |
 |--------|--------|:---:|---|
-| QMIX (full-comm, no topology) | `qmix_fullcomm_mpe` | **Missing** | Log not in repo |
-| ExpoComm (sparse, no compress) | `ExpoComm_mpe` | **Missing** | Log not in repo |
-| BVME-only (full graph + compress) | `bvme_only_mpe` | **Missing** | Log not in repo |
+| QMIX (full-comm, no topology) | `qmix_fullcomm_mpe` | **-26.597** | `mpe_baselines.log` |
+| ExpoComm (sparse, no compress) | `ExpoComm_mpe` | **-27.113** | `mpe_baselines.log` |
+| BVME-only (full graph + compress) | `bvme_only_mpe` | **-28.896** | `mpe_baselines.log` |
 | ExpoComm-B (ours) | `ExpoComm_B_mpe` | **-8.160** | `ablation_nots.log` |
 
 ### KL Weight Ablation (λ sweep) — ALL COMPLETE ✅
