@@ -1,0 +1,805 @@
+nohup: ignoring input
+>>> [1/3] QMIX - Started: Wed Apr 29 01:42:33 PM CDT 2026
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/vt20/.netrc.
+wandb: Currently logged in as: vt20 (vt20-rice-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run igux8yoe
+wandb: Tracking run with wandb version 0.24.2
+wandb: Run data is saved locally in /home/vt20/ExpoComm/wandb/run-20260429_134241-igux8yoe
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run MAgent-Test-qmix_fullcomm_mpe-20260429_134241
+wandb: ⭐️ View project at https://wandb.ai/vt20-rice-university/ExpoComm-B
+wandb: 🚀 View run at https://wandb.ai/vt20-rice-university/ExpoComm-B/runs/igux8yoe
+2026-04-29 13:42:43,807 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - WARNING - CUDA flag use_cuda was switched OFF automatically because no CUDA devices are available!
+2026-04-29 13:42:43,808 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Current directory: /home/vt20/ExpoComm.
+2026-04-29 13:42:43,808 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Experiment Parameters:
+2026-04-29 13:42:43,809 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - 
+
+{   'action_selector': 'epsilon_greedy',
+    'add_value_last_step': True,
+    'agent': 'rnn',
+    'agent_output_type': 'q',
+    'batch_size': 32,
+    'batch_size_run': 1,
+    'buffer_cpu_only': True,
+    'buffer_size': 5000,
+    'checkpoint_path': '',
+    'double_q': True,
+    'env': 'MPE_Spread',
+    'env_args': {   'continuous_actions': False,
+                    'max_cycles': 25,
+                    'n_agents': 3,
+                    'seed': 123},
+    'epsilon_anneal_time': 50000,
+    'epsilon_finish': 0.05,
+    'epsilon_start': 1.0,
+    'evaluate': False,
+    'evaluation_epsilon': 0.0,
+    'exp_name': 'ExpoComm-B',
+    'gamma': 0.99,
+    'grad_norm_clip': 10,
+    'hidden_dim': 64,
+    'hypergroup': None,
+    'hypernet_embed': 64,
+    'hypernet_layers': 2,
+    'label': 'default_label',
+    'learner': 'q_learner',
+    'learner_log_interval': 10000,
+    'load_step': 0,
+    'local_results_path': 'results',
+    'log_interval': 25000,
+    'lr': 0.0005,
+    'mac': 'basic_mac',
+    'mixer': 'qmix',
+    'mixing_embed_dim': 32,
+    'name': 'qmix_fullcomm_mpe',
+    'obs_agent_id': True,
+    'obs_individual_obs': False,
+    'obs_last_action': True,
+    'optim_alpha': 0.99,
+    'optim_eps': 1e-05,
+    'render': False,
+    'repeat_id': 1,
+    'run_name': 'MAgent-Test',
+    'runner': 'episode',
+    'runner_log_interval': 10000,
+    'save_model': True,
+    'save_model_interval': 50000,
+    'save_replay': False,
+    'seed': 123,
+    'standardise_returns': False,
+    'standardise_rewards': True,
+    't_max': 500000,
+    'target_update_interval_or_tau': 200,
+    'test_greedy': True,
+    'test_interval': 25000,
+    'test_nepisode': 32,
+    'use_cuda': False,
+    'use_rnn': True,
+    'use_tensorboard': False,
+    'work_dir': 'work_dirs/ExpoComm-B/qmix_fullcomm_mpe/MAgent-Test/20260429_134241'}
+
+2026-04-29 13:42:43,964 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Beginning training for 500000 timesteps
+2026-04-29 13:42:44,420 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 25 / 500000
+2026-04-29 13:42:44,421 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 9 seconds. Time passed: 0 seconds
+2026-04-29 13:42:45,013 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/qmix_fullcomm_mpe/MAgent-Test/20260429_134241/models/25
+2026-04-29 13:43:19,086 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:      25000 | Episode:     1000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.6200	grad_norm:                 6.5241
+loss:                      1.1428	q_taken_mean:              0.1427	return_mean:             -35.8462	return_std:                4.3837
+target_mean:               0.2387	td_error_abs:              0.8645	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -81.8745	test_return_std:          15.9836	
+2026-04-29 13:43:19,119 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 25025 / 500000
+2026-04-29 13:43:19,120 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 10 minutes, 59 seconds. Time passed: 35 seconds
+2026-04-29 13:43:53,934 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:      50000 | Episode:     2000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.2400	grad_norm:                17.1503
+loss:                      1.4815	q_taken_mean:              0.4261	return_mean:             -34.7822	return_std:                4.8568
+target_mean:               0.5610	td_error_abs:              0.9706	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -57.8042	test_return_std:          11.1322	
+2026-04-29 13:43:53,971 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 50025 / 500000
+2026-04-29 13:43:53,971 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 10 minutes, 27 seconds. Time passed: 1 minutes, 10 seconds
+2026-04-29 13:43:54,519 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/qmix_fullcomm_mpe/MAgent-Test/20260429_134241/models/50025
+2026-04-29 13:44:29,074 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:      75000 | Episode:     3000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                41.4012
+loss:                      1.9716	q_taken_mean:              1.3928	return_mean:             -32.6044	return_std:                5.6598
+target_mean:               1.5572	td_error_abs:              1.0650	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -49.4835	test_return_std:           9.3810	
+2026-04-29 13:44:29,109 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 75025 / 500000
+2026-04-29 13:44:29,109 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 9 minutes, 57 seconds. Time passed: 1 minutes, 45 seconds
+2026-04-29 13:45:04,711 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     100000 | Episode:     4000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                44.5328
+loss:                      2.0715	q_taken_mean:              2.0236	return_mean:             -32.3027	return_std:                5.5994
+target_mean:               2.1231	td_error_abs:              1.0293	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -45.0665	test_return_std:           8.4296	
+2026-04-29 13:45:04,749 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 100025 / 500000
+2026-04-29 13:45:04,750 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 9 minutes, 30 seconds. Time passed: 2 minutes, 20 seconds
+2026-04-29 13:45:05,297 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/qmix_fullcomm_mpe/MAgent-Test/20260429_134241/models/100025
+2026-04-29 13:45:39,397 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     125000 | Episode:     5000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                35.3417
+loss:                      2.0646	q_taken_mean:              2.5981	return_mean:             -32.4145	return_std:                5.3912
+target_mean:               2.6257	td_error_abs:              1.0210	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -42.5472	test_return_std:           7.6842	
+2026-04-29 13:45:39,432 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 125025 / 500000
+2026-04-29 13:45:39,433 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 8 minutes, 40 seconds. Time passed: 2 minutes, 55 seconds
+2026-04-29 13:46:14,058 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     150000 | Episode:     6000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                32.8319
+loss:                      1.8780	q_taken_mean:              2.6160	return_mean:             -32.1160	return_std:                5.4533
+target_mean:               2.6149	td_error_abs:              0.9994	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -32.1761	test_return_std:           5.5838	
+2026-04-29 13:46:14,097 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 150025 / 500000
+2026-04-29 13:46:14,097 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 8 minutes, 5 seconds. Time passed: 3 minutes, 30 seconds
+2026-04-29 13:46:14,644 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/qmix_fullcomm_mpe/MAgent-Test/20260429_134241/models/150025
+2026-04-29 13:46:48,708 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     175000 | Episode:     7000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                27.0174
+loss:                      1.5164	q_taken_mean:              2.3300	return_mean:             -31.2858	return_std:                5.4549
+target_mean:               2.3085	td_error_abs:              0.9078	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -31.8141	test_return_std:           5.4768	
+2026-04-29 13:46:48,742 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 175025 / 500000
+2026-04-29 13:46:48,742 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 7 minutes, 30 seconds. Time passed: 4 minutes, 4 seconds
+2026-04-29 13:47:22,987 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     200000 | Episode:     8000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                25.2568
+loss:                      1.4605	q_taken_mean:              2.0960	return_mean:             -30.9108	return_std:                5.2589
+target_mean:               2.1125	td_error_abs:              0.8773	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -30.9996	test_return_std:           5.0809	
+2026-04-29 13:47:23,023 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 200025 / 500000
+2026-04-29 13:47:23,024 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 6 minutes, 51 seconds. Time passed: 4 minutes, 39 seconds
+2026-04-29 13:47:23,563 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/qmix_fullcomm_mpe/MAgent-Test/20260429_134241/models/200025
+2026-04-29 13:47:56,102 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     225000 | Episode:     9000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                34.9565
+loss:                      1.6453	q_taken_mean:              2.0682	return_mean:             -30.6171	return_std:                5.1811
+target_mean:               2.1354	td_error_abs:              0.9171	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -30.8510	test_return_std:           5.2760	
+2026-04-29 13:47:56,135 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 225025 / 500000
+2026-04-29 13:47:56,135 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 6 minutes, 4 seconds. Time passed: 5 minutes, 12 seconds
+2026-04-29 13:48:29,259 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     250000 | Episode:    10000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                37.9676
+loss:                      1.5652	q_taken_mean:              2.4747	return_mean:             -30.2319	return_std:                4.9828
+target_mean:               2.5464	td_error_abs:              0.8986	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -30.3271	test_return_std:           5.4118	
+2026-04-29 13:48:29,294 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 250025 / 500000
+2026-04-29 13:48:29,295 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 5 minutes, 31 seconds. Time passed: 5 minutes, 45 seconds
+2026-04-29 13:48:29,840 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/qmix_fullcomm_mpe/MAgent-Test/20260429_134241/models/250025
+2026-04-29 13:49:03,465 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     275000 | Episode:    11000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                30.1081
+loss:                      1.3743	q_taken_mean:              2.8804	return_mean:             -29.6872	return_std:                4.6521
+target_mean:               2.9336	td_error_abs:              0.8484	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -30.1961	test_return_std:           5.1783	
+2026-04-29 13:49:03,501 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 275025 / 500000
+2026-04-29 13:49:03,501 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 5 minutes, 7 seconds. Time passed: 6 minutes, 19 seconds
+2026-04-29 13:49:37,852 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     300000 | Episode:    12000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                24.4901
+loss:                      1.3743	q_taken_mean:              3.0541	return_mean:             -29.3415	return_std:                4.6134
+target_mean:               3.0928	td_error_abs:              0.8374	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -29.7657	test_return_std:           4.8529	
+2026-04-29 13:49:37,889 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 300025 / 500000
+2026-04-29 13:49:37,889 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 4 minutes, 35 seconds. Time passed: 6 minutes, 53 seconds
+2026-04-29 13:49:38,433 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/qmix_fullcomm_mpe/MAgent-Test/20260429_134241/models/300025
+2026-04-29 13:50:12,901 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     325000 | Episode:    13000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                25.2581
+loss:                      1.3662	q_taken_mean:              3.6906	return_mean:             -28.6073	return_std:                4.4273
+target_mean:               3.7160	td_error_abs:              0.8407	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -29.5751	test_return_std:           4.8627	
+2026-04-29 13:50:12,936 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 325025 / 500000
+2026-04-29 13:50:12,937 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 4 minutes, 5 seconds. Time passed: 7 minutes, 28 seconds
+2026-04-29 13:50:48,057 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     350000 | Episode:    14000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                26.0524
+loss:                      1.3733	q_taken_mean:              3.7345	return_mean:             -28.3169	return_std:                4.3682
+target_mean:               3.7433	td_error_abs:              0.8541	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -29.1989	test_return_std:           4.4731	
+2026-04-29 13:50:48,096 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 350025 / 500000
+2026-04-29 13:50:48,096 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 3 minutes, 30 seconds. Time passed: 8 minutes, 4 seconds
+2026-04-29 13:50:48,638 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/qmix_fullcomm_mpe/MAgent-Test/20260429_134241/models/350025
+2026-04-29 13:51:23,104 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     375000 | Episode:    15000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                24.2457
+loss:                      1.4620	q_taken_mean:              3.5134	return_mean:             -28.0289	return_std:                4.2012
+target_mean:               3.5089	td_error_abs:              0.8559	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -28.7812	test_return_std:           4.0452	
+2026-04-29 13:51:23,139 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 375025 / 500000
+2026-04-29 13:51:23,139 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 2 minutes, 55 seconds. Time passed: 8 minutes, 39 seconds
+2026-04-29 13:51:58,338 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     400000 | Episode:    16000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                22.7470
+loss:                      1.4080	q_taken_mean:              3.6269	return_mean:             -27.7093	return_std:                4.1319
+target_mean:               3.6389	td_error_abs:              0.8515	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -28.0194	test_return_std:           3.9918	
+2026-04-29 13:51:58,377 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 400025 / 500000
+2026-04-29 13:51:58,377 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 2 minutes, 20 seconds. Time passed: 9 minutes, 14 seconds
+2026-04-29 13:51:58,921 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/qmix_fullcomm_mpe/MAgent-Test/20260429_134241/models/400025
+2026-04-29 13:52:33,843 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     425000 | Episode:    17000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                25.2273
+loss:                      1.2770	q_taken_mean:              3.6941	return_mean:             -27.3019	return_std:                4.2170
+target_mean:               3.7336	td_error_abs:              0.8383	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -27.5157	test_return_std:           3.9310	
+2026-04-29 13:52:33,878 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 425025 / 500000
+2026-04-29 13:52:33,878 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 1 minutes, 46 seconds. Time passed: 9 minutes, 49 seconds
+2026-04-29 13:53:09,520 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     450000 | Episode:    18000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                29.8306
+loss:                      1.3086	q_taken_mean:              3.7160	return_mean:             -27.2401	return_std:                4.2457
+target_mean:               3.7624	td_error_abs:              0.8403	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -27.2560	test_return_std:           3.9560	
+2026-04-29 13:53:09,557 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 450025 / 500000
+2026-04-29 13:53:09,558 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 1 minutes, 11 seconds. Time passed: 10 minutes, 25 seconds
+2026-04-29 13:53:10,111 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/qmix_fullcomm_mpe/MAgent-Test/20260429_134241/models/450025
+2026-04-29 13:53:45,260 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     475000 | Episode:    19000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                28.8356
+loss:                      1.3175	q_taken_mean:              3.7043	return_mean:             -27.0075	return_std:                4.1113
+target_mean:               3.7432	td_error_abs:              0.8452	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -26.8052	test_return_std:           3.9374	
+2026-04-29 13:53:45,294 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 475025 / 500000
+2026-04-29 13:53:45,294 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: 35 seconds. Time passed: 11 minutes, 1 seconds
+2026-04-29 13:54:20,196 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     500000 | Episode:    20000
+ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500	grad_norm:                25.2070
+loss:                      1.2318	q_taken_mean:              3.8415	return_mean:             -26.7346	return_std:                3.9945
+target_mean:               3.8776	td_error_abs:              0.8163	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000
+test_return_mean:        -26.5966	test_return_std:           4.1011	
+2026-04-29 13:54:20,235 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - t_env: 500025 / 500000
+2026-04-29 13:54:20,235 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Estimated time left: -. Time passed: 11 minutes, 36 seconds
+2026-04-29 13:54:20,781 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/qmix_fullcomm_mpe/MAgent-Test/20260429_134241/models/500025
+2026-04-29 13:54:20,788 - ExpoComm-B - qmix_fullcomm_mpe - MAgent-Test - INFO - Finished Training
+Exiting Main
+Stopping all threads
+Thread wandb-AsyncioManager-main is alive! Is daemon: True
+Thread joined
+Thread ChkStopThr is alive! Is daemon: True
+Thread joined
+Thread IntMsgThr is alive! Is daemon: True
+Thread joined
+Exiting script
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mMAgent-Test-qmix_fullcomm_mpe-20260429_134241[0m at: [34mhttps://wandb.ai/vt20-rice-university/ExpoComm-B/runs/igux8yoe[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/run-20260429_134241-igux8yoe/logs[0m
+>>> [2/3] ExpoComm - Started: Wed Apr 29 01:54:28 PM CDT 2026
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/vt20/.netrc.
+wandb: Currently logged in as: vt20 (vt20-rice-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run 9f149tzi
+wandb: Tracking run with wandb version 0.24.2
+wandb: Run data is saved locally in /home/vt20/ExpoComm/wandb/run-20260429_135431-9f149tzi
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run MAgent-Test-ExpoComm_mpe-20260429_135431
+wandb: ⭐️ View project at https://wandb.ai/vt20-rice-university/ExpoComm-B
+wandb: 🚀 View run at https://wandb.ai/vt20-rice-university/ExpoComm-B/runs/9f149tzi
+2026-04-29 13:54:33,149 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - WARNING - CUDA flag use_cuda was switched OFF automatically because no CUDA devices are available!
+2026-04-29 13:54:33,149 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Current directory: /home/vt20/ExpoComm.
+2026-04-29 13:54:33,149 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Experiment Parameters:
+2026-04-29 13:54:33,150 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - 
+
+{   'action_selector': 'epsilon_greedy',
+    'add_value_last_step': True,
+    'agent': 'ExpoComm_one_peer',
+    'agent_output_type': 'q',
+    'aux_coef': 0.1,
+    'batch_size': 32,
+    'batch_size_run': 1,
+    'buffer_cpu_only': True,
+    'buffer_size': 5000,
+    'checkpoint_path': '',
+    'double_q': True,
+    'env': 'MPE_Spread',
+    'env_args': {   'continuous_actions': False,
+                    'max_cycles': 25,
+                    'n_agents': 3,
+                    'seed': 123},
+    'epsilon_anneal_time': 50000,
+    'epsilon_finish': 0.05,
+    'epsilon_start': 1.0,
+    'evaluate': False,
+    'evaluation_epsilon': 0.0,
+    'exp_name': 'ExpoComm-B',
+    'gamma': 0.99,
+    'grad_norm_clip': 10,
+    'hidden_dim': 64,
+    'hypergroup': None,
+    'hypernet_embed': 64,
+    'hypernet_layers': 2,
+    'label': 'default_label',
+    'learner': 'aux_q_learner',
+    'learner_log_interval': 10000,
+    'load_step': 0,
+    'local_results_path': 'results',
+    'log_interval': 25000,
+    'lr': 0.0005,
+    'mac': 'ExpoComm_mac',
+    'mixer': 'qmix',
+    'mixing_embed_dim': 32,
+    'name': 'ExpoComm_mpe',
+    'obs_agent_id': True,
+    'obs_individual_obs': False,
+    'obs_last_action': True,
+    'one_peer': True,
+    'optim_alpha': 0.99,
+    'optim_eps': 1e-05,
+    'pos_flag': False,
+    'render': False,
+    'repeat_id': 1,
+    'run_name': 'MAgent-Test',
+    'runner': 'episode',
+    'runner_log_interval': 10000,
+    'save_model': True,
+    'save_model_interval': 50000,
+    'save_replay': False,
+    'seed': 123,
+    'standardise_returns': False,
+    'standardise_rewards': True,
+    't_max': 500000,
+    'target_update_interval_or_tau': 200,
+    'test_greedy': True,
+    'test_interval': 25000,
+    'test_nepisode': 32,
+    'topk_neighbors': 3,
+    'use_cuda': False,
+    'use_rnn': True,
+    'use_tensorboard': False,
+    'work_dir': 'work_dirs/ExpoComm-B/ExpoComm_mpe/MAgent-Test/20260429_135431'}
+
+2026-04-29 13:54:33,190 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Beginning training for 500000 timesteps
+2026-04-29 13:54:33,224 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 25 / 500000
+2026-04-29 13:54:33,224 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 0 seconds. Time passed: 0 seconds
+2026-04-29 13:54:33,986 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/ExpoComm_mpe/MAgent-Test/20260429_135431/models/25
+2026-04-29 13:55:43,178 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:      25000 | Episode:     1000
+aux_loss:                 20.3516	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.6200
+grad_norm:                17.1301	loss:                      3.2963	q_loss:                    1.2611	q_taken_mean:              0.2907
+return_mean:             -37.6169	return_std:                4.4642	target_mean:               0.4085	td_error_abs:              0.9051
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -75.5276	test_return_std:          16.3120
+
+2026-04-29 13:55:43,250 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 25025 / 500000
+2026-04-29 13:55:43,250 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 22 minutes, 10 seconds. Time passed: 1 minutes, 10 seconds
+2026-04-29 13:56:54,517 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:      50000 | Episode:     2000
+aux_loss:                 15.3680	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.2400
+grad_norm:                34.7707	loss:                      3.0054	q_loss:                    1.4686	q_taken_mean:              0.6493
+return_mean:             -35.6695	return_std:                4.7322	target_mean:               0.8099	td_error_abs:              0.9752
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -54.5863	test_return_std:          10.4937
+
+2026-04-29 13:56:54,588 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 50025 / 500000
+2026-04-29 13:56:54,589 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 21 minutes, 24 seconds. Time passed: 2 minutes, 21 seconds
+2026-04-29 13:56:55,356 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/ExpoComm_mpe/MAgent-Test/20260429_135431/models/50025
+2026-04-29 13:58:06,002 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:      75000 | Episode:     3000
+aux_loss:                  6.6995	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                51.1530	loss:                      2.2784	q_loss:                    1.6084	q_taken_mean:              1.6256
+return_mean:             -32.2697	return_std:                5.4029	target_mean:               1.7661	td_error_abs:              0.9856
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -46.8091	test_return_std:           8.3787
+
+2026-04-29 13:58:06,073 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 75025 / 500000
+2026-04-29 13:58:06,074 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 20 minutes, 15 seconds. Time passed: 3 minutes, 32 seconds
+2026-04-29 13:59:18,040 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     100000 | Episode:     4000
+aux_loss:                  5.4161	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                43.9026	loss:                      2.1030	q_loss:                    1.5614	q_taken_mean:              2.3805
+return_mean:             -32.1083	return_std:                5.4509	target_mean:               2.4515	td_error_abs:              0.9332
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -42.9017	test_return_std:           7.4341
+
+2026-04-29 13:59:18,116 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 100025 / 500000
+2026-04-29 13:59:18,116 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 19 minutes, 12 seconds. Time passed: 4 minutes, 44 seconds
+2026-04-29 13:59:18,896 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/ExpoComm_mpe/MAgent-Test/20260429_135431/models/100025
+2026-04-29 14:00:29,939 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     125000 | Episode:     5000
+aux_loss:                  4.8307	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                32.4758	loss:                      2.1072	q_loss:                    1.6242	q_taken_mean:              2.8051
+return_mean:             -32.5744	return_std:                5.5123	target_mean:               2.8332	td_error_abs:              0.9121
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -40.4366	test_return_std:           6.7958
+
+2026-04-29 14:00:30,013 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 125025 / 500000
+2026-04-29 14:00:30,013 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 17 minutes, 58 seconds. Time passed: 5 minutes, 56 seconds
+2026-04-29 14:01:44,110 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     150000 | Episode:     6000
+aux_loss:                  4.2199	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                24.4873	loss:                      1.9592	q_loss:                    1.5372	q_taken_mean:              2.6107
+return_mean:             -32.3310	return_std:                5.5319	target_mean:               2.6324	td_error_abs:              0.8870
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -31.4187	test_return_std:           4.5597
+
+2026-04-29 14:01:44,185 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 150025 / 500000
+2026-04-29 14:01:44,186 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 17 minutes, 18 seconds. Time passed: 7 minutes, 10 seconds
+2026-04-29 14:01:44,969 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/ExpoComm_mpe/MAgent-Test/20260429_135431/models/150025
+2026-04-29 14:02:57,866 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     175000 | Episode:     7000
+aux_loss:                  3.2282	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                29.5131	loss:                      1.9723	q_loss:                    1.6494	q_taken_mean:              2.4712
+return_mean:             -31.5414	return_std:                5.3198	target_mean:               2.4810	td_error_abs:              0.9068
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -30.8786	test_return_std:           4.5046
+
+2026-04-29 14:02:57,940 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 175025 / 500000
+2026-04-29 14:02:57,940 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 15 minutes, 58 seconds. Time passed: 8 minutes, 24 seconds
+2026-04-29 14:04:12,367 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     200000 | Episode:     8000
+aux_loss:                  3.1789	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                33.0022	loss:                      1.8966	q_loss:                    1.5787	q_taken_mean:              2.5615
+return_mean:             -31.6072	return_std:                5.3517	target_mean:               2.5540	td_error_abs:              0.8780
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -31.1741	test_return_std:           4.8255
+
+2026-04-29 14:04:12,448 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 200025 / 500000
+2026-04-29 14:04:12,449 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 14 minutes, 54 seconds. Time passed: 9 minutes, 39 seconds
+2026-04-29 14:04:13,251 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/ExpoComm_mpe/MAgent-Test/20260429_135431/models/200025
+2026-04-29 14:05:26,508 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     225000 | Episode:     9000
+aux_loss:                  2.9559	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                24.1211	loss:                      1.5115	q_loss:                    1.2159	q_taken_mean:              2.2413
+return_mean:             -32.0580	return_std:                5.3898	target_mean:               2.2345	td_error_abs:              0.8008
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -31.2644	test_return_std:           4.8796
+
+2026-04-29 14:05:26,581 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 225025 / 500000
+2026-04-29 14:05:26,582 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 13 minutes, 35 seconds. Time passed: 10 minutes, 53 seconds
+2026-04-29 14:06:40,098 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     250000 | Episode:    10000
+aux_loss:                  2.6890	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                21.0214	loss:                      1.3980	q_loss:                    1.1291	q_taken_mean:              2.1269
+return_mean:             -31.9354	return_std:                5.3892	target_mean:               2.1187	td_error_abs:              0.7805
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -31.7971	test_return_std:           5.4658
+
+2026-04-29 14:06:40,171 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 250025 / 500000
+2026-04-29 14:06:40,172 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 12 minutes, 15 seconds. Time passed: 12 minutes, 6 seconds
+2026-04-29 14:06:40,960 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/ExpoComm_mpe/MAgent-Test/20260429_135431/models/250025
+2026-04-29 14:07:53,028 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     275000 | Episode:    11000
+aux_loss:                  2.4615	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                24.2700	loss:                      1.2846	q_loss:                    1.0385	q_taken_mean:              2.2598
+return_mean:             -31.2060	return_std:                5.2800	target_mean:               2.2484	td_error_abs:              0.7584
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -32.1989	test_return_std:           5.7419
+
+2026-04-29 14:07:53,101 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 275025 / 500000
+2026-04-29 14:07:53,102 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 10 minutes, 56 seconds. Time passed: 13 minutes, 19 seconds
+2026-04-29 14:09:06,252 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     300000 | Episode:    12000
+aux_loss:                  2.5181	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                23.1454	loss:                      1.3095	q_loss:                    1.0577	q_taken_mean:              2.0500
+return_mean:             -30.6516	return_std:                5.1015	target_mean:               2.0443	td_error_abs:              0.7574
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -31.8864	test_return_std:           5.8311
+
+2026-04-29 14:09:06,329 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 300025 / 500000
+2026-04-29 14:09:06,329 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 9 minutes, 45 seconds. Time passed: 14 minutes, 33 seconds
+2026-04-29 14:09:07,120 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/ExpoComm_mpe/MAgent-Test/20260429_135431/models/300025
+2026-04-29 14:10:19,868 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     325000 | Episode:    13000
+aux_loss:                  2.3759	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                25.1433	loss:                      1.3683	q_loss:                    1.1307	q_taken_mean:              2.3361
+return_mean:             -29.6066	return_std:                4.7355	target_mean:               2.3590	td_error_abs:              0.7574
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -31.2882	test_return_std:           5.6992
+
+2026-04-29 14:10:19,942 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 325025 / 500000
+2026-04-29 14:10:19,943 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 8 minutes, 35 seconds. Time passed: 15 minutes, 46 seconds
+2026-04-29 14:11:33,073 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     350000 | Episode:    14000
+aux_loss:                  2.2141	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                32.1258	loss:                      1.3986	q_loss:                    1.1772	q_taken_mean:              2.5530
+return_mean:             -29.1783	return_std:                4.5672	target_mean:               2.5982	td_error_abs:              0.7813
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -31.0993	test_return_std:           5.7491
+
+2026-04-29 14:11:33,147 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 350025 / 500000
+2026-04-29 14:11:33,147 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 7 minutes, 19 seconds. Time passed: 16 minutes, 59 seconds
+2026-04-29 14:11:33,936 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/ExpoComm_mpe/MAgent-Test/20260429_135431/models/350025
+2026-04-29 14:12:45,692 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     375000 | Episode:    15000
+aux_loss:                  1.9731	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                34.1795	loss:                      1.3385	q_loss:                    1.1412	q_taken_mean:              2.7699
+return_mean:             -28.6166	return_std:                4.4098	target_mean:               2.8174	td_error_abs:              0.7902
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -29.9079	test_return_std:           4.9291
+
+2026-04-29 14:12:45,765 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 375025 / 500000
+2026-04-29 14:12:45,766 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 6 minutes, 3 seconds. Time passed: 18 minutes, 12 seconds
+2026-04-29 14:13:58,594 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     400000 | Episode:    16000
+aux_loss:                  1.8827	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                27.5214	loss:                      1.2481	q_loss:                    1.0598	q_taken_mean:              3.0134
+return_mean:             -28.1583	return_std:                4.3555	target_mean:               3.0512	td_error_abs:              0.7601
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -28.8666	test_return_std:           4.3142
+
+2026-04-29 14:13:58,667 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 400025 / 500000
+2026-04-29 14:13:58,668 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 4 minutes, 51 seconds. Time passed: 19 minutes, 25 seconds
+2026-04-29 14:13:59,474 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/ExpoComm_mpe/MAgent-Test/20260429_135431/models/400025
+2026-04-29 14:15:09,555 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     425000 | Episode:    17000
+aux_loss:                  1.7981	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                20.6853	loss:                      1.1796	q_loss:                    0.9998	q_taken_mean:              3.1035
+return_mean:             -27.9019	return_std:                4.2855	target_mean:               3.1253	td_error_abs:              0.7370
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -28.6163	test_return_std:           4.2506
+
+2026-04-29 14:15:09,625 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 425025 / 500000
+2026-04-29 14:15:09,626 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 3 minutes, 32 seconds. Time passed: 20 minutes, 36 seconds
+2026-04-29 14:16:21,669 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     450000 | Episode:    18000
+aux_loss:                  1.7276	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                19.3515	loss:                      1.2019	q_loss:                    1.0291	q_taken_mean:              3.2245
+return_mean:             -27.6469	return_std:                4.1823	target_mean:               3.2319	td_error_abs:              0.7408
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -28.1698	test_return_std:           3.9876
+
+2026-04-29 14:16:21,741 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 450025 / 500000
+2026-04-29 14:16:21,741 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 2 minutes, 24 seconds. Time passed: 21 minutes, 48 seconds
+2026-04-29 14:16:22,532 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/ExpoComm_mpe/MAgent-Test/20260429_135431/models/450025
+2026-04-29 14:17:32,536 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     475000 | Episode:    19000
+aux_loss:                  1.6787	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                25.7222	loss:                      1.3158	q_loss:                    1.1479	q_taken_mean:              3.3223
+return_mean:             -27.2671	return_std:                4.1160	target_mean:               3.3487	td_error_abs:              0.7676
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -27.3993	test_return_std:           3.6699
+
+2026-04-29 14:17:32,607 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 475025 / 500000
+2026-04-29 14:17:32,608 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: 1 minutes, 10 seconds. Time passed: 22 minutes, 59 seconds
+2026-04-29 14:18:43,349 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Recent Stats | t_env:     500000 | Episode:    20000
+aux_loss:                  1.6846	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                26.2226	loss:                      1.2566	q_loss:                    1.0881	q_taken_mean:              3.3321
+return_mean:             -27.1094	return_std:                3.9905	target_mean:               3.3694	td_error_abs:              0.7492
+test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -27.1132	test_return_std:           3.6324
+
+2026-04-29 14:18:43,424 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - t_env: 500025 / 500000
+2026-04-29 14:18:43,425 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Estimated time left: -. Time passed: 24 minutes, 10 seconds
+2026-04-29 14:18:44,206 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/ExpoComm_mpe/MAgent-Test/20260429_135431/models/500025
+2026-04-29 14:18:44,213 - ExpoComm-B - ExpoComm_mpe - MAgent-Test - INFO - Finished Training
+Exiting Main
+Stopping all threads
+Thread wandb-AsyncioManager-main is alive! Is daemon: True
+Thread joined
+Thread ChkStopThr is alive! Is daemon: True
+Thread joined
+Thread IntMsgThr is alive! Is daemon: True
+Thread joined
+Exiting script
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mMAgent-Test-ExpoComm_mpe-20260429_135431[0m at: [34mhttps://wandb.ai/vt20-rice-university/ExpoComm-B/runs/9f149tzi[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/run-20260429_135431-9f149tzi/logs[0m
+>>> [3/3] BVME-only - Started: Wed Apr 29 02:18:48 PM CDT 2026
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/vt20/.netrc.
+wandb: Currently logged in as: vt20 (vt20-rice-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run wmevb3bo
+wandb: Tracking run with wandb version 0.24.2
+wandb: Run data is saved locally in /home/vt20/ExpoComm/wandb/run-20260429_141851-wmevb3bo
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run MAgent-Test-bvme_only_mpe-20260429_141850
+wandb: ⭐️ View project at https://wandb.ai/vt20-rice-university/ExpoComm-B
+wandb: 🚀 View run at https://wandb.ai/vt20-rice-university/ExpoComm-B/runs/wmevb3bo
+2026-04-29 14:18:52,139 - ExpoComm-B - bvme_only_mpe - MAgent-Test - WARNING - CUDA flag use_cuda was switched OFF automatically because no CUDA devices are available!
+2026-04-29 14:18:52,139 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Current directory: /home/vt20/ExpoComm.
+2026-04-29 14:18:52,139 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Experiment Parameters:
+2026-04-29 14:18:52,140 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - 
+
+{   'action_selector': 'epsilon_greedy',
+    'add_value_last_step': True,
+    'agent': 'ExpoComm_bvme',
+    'agent_output_type': 'q',
+    'aux_coef': 0.1,
+    'batch_size': 32,
+    'batch_size_run': 1,
+    'buffer_cpu_only': True,
+    'buffer_size': 5000,
+    'bvme_compressed_dim': None,
+    'bvme_lambda_kl': 1.0,
+    'bvme_log_var_max': 3.0,
+    'bvme_log_var_min': -5.0,
+    'bvme_sigma_0': 0.01,
+    'checkpoint_path': '',
+    'double_q': True,
+    'env': 'MPE_Spread',
+    'env_args': {   'continuous_actions': False,
+                    'max_cycles': 25,
+                    'n_agents': 3,
+                    'seed': 123},
+    'epsilon_anneal_time': 50000,
+    'epsilon_finish': 0.05,
+    'epsilon_start': 1.0,
+    'evaluate': False,
+    'evaluation_epsilon': 0.0,
+    'exp_name': 'ExpoComm-B',
+    'gamma': 0.99,
+    'grad_norm_clip': 10,
+    'hidden_dim': 64,
+    'hypergroup': None,
+    'hypernet_embed': 64,
+    'hypernet_layers': 2,
+    'label': 'default_label',
+    'learner': 'bvme_q_learner',
+    'learner_log_interval': 10000,
+    'load_step': 0,
+    'local_results_path': 'results',
+    'log_interval': 25000,
+    'lr': 0.0005,
+    'mac': 'ExpoComm_bvme_mac',
+    'mixer': 'qmix',
+    'mixing_embed_dim': 32,
+    'name': 'bvme_only_mpe',
+    'obs_agent_id': True,
+    'obs_individual_obs': False,
+    'obs_last_action': True,
+    'one_peer': True,
+    'optim_alpha': 0.99,
+    'optim_eps': 1e-05,
+    'pos_flag': False,
+    'render': False,
+    'repeat_id': 1,
+    'run_name': 'MAgent-Test',
+    'runner': 'episode',
+    'runner_log_interval': 10000,
+    'save_model': True,
+    'save_model_interval': 50000,
+    'save_replay': False,
+    'seed': 123,
+    'standardise_returns': False,
+    'standardise_rewards': True,
+    't_max': 500000,
+    'target_update_interval_or_tau': 200,
+    'test_greedy': True,
+    'test_interval': 25000,
+    'test_nepisode': 32,
+    'topk_neighbors': 3,
+    'use_cuda': False,
+    'use_rnn': True,
+    'use_tensorboard': False,
+    'work_dir': 'work_dirs/ExpoComm-B/bvme_only_mpe/MAgent-Test/20260429_141850'}
+
+2026-04-29 14:18:52,184 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Beginning training for 500000 timesteps
+2026-04-29 14:18:52,223 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 25 / 500000
+2026-04-29 14:18:52,223 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 0 seconds. Time passed: 0 seconds
+2026-04-29 14:18:53,097 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/bvme_only_mpe/MAgent-Test/20260429_141850/models/25
+2026-04-29 14:20:16,880 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:      25000 | Episode:     1000
+aux_loss:                 32.6635	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.6200
+grad_norm:               357.3903	kl_loss:                 1706.0092	loss:                    1710.6048	q_loss:                    1.3292
+q_taken_mean:              0.0129	return_mean:             -38.2225	return_std:                5.6447	target_mean:              -0.0030
+td_error_abs:              0.8794	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -69.2301
+test_return_std:          15.5707	
+2026-04-29 14:20:16,967 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 25025 / 500000
+2026-04-29 14:20:16,967 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 26 minutes, 50 seconds. Time passed: 1 minutes, 24 seconds
+2026-04-29 14:21:43,101 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:      50000 | Episode:     2000
+aux_loss:                 30.3308	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.2400
+grad_norm:               225.8111	kl_loss:                 1036.0431	loss:                    1040.5005	q_loss:                    1.4244
+q_taken_mean:              0.2896	return_mean:             -36.5428	return_std:                5.6150	target_mean:               0.3480
+td_error_abs:              0.9040	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -55.8654
+test_return_std:          11.2475	
+2026-04-29 14:21:43,193 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 50025 / 500000
+2026-04-29 14:21:43,193 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 25 minutes, 51 seconds. Time passed: 2 minutes, 51 seconds
+2026-04-29 14:21:44,013 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/bvme_only_mpe/MAgent-Test/20260429_141850/models/50025
+2026-04-29 14:23:09,571 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:      75000 | Episode:     3000
+aux_loss:                 23.5501	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                32.5050	kl_loss:                  31.0995	loss:                     35.3564	q_loss:                    1.9018
+q_taken_mean:              1.4088	return_mean:             -32.9661	return_std:                5.5606	target_mean:               1.5664
+td_error_abs:              1.0108	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -47.8480
+test_return_std:           9.4316	
+2026-04-29 14:23:09,659 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 75025 / 500000
+2026-04-29 14:23:09,659 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 24 minutes, 29 seconds. Time passed: 4 minutes, 17 seconds
+2026-04-29 14:24:37,532 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     100000 | Episode:     4000
+aux_loss:                 20.2049	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                33.1470	kl_loss:                  31.1034	loss:                     35.0615	q_loss:                    1.9376
+q_taken_mean:              2.0888	return_mean:             -32.0330	return_std:                5.5809	target_mean:               2.2074
+td_error_abs:              0.9958	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -43.5894
+test_return_std:           8.3373	
+2026-04-29 14:24:37,621 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 100025 / 500000
+2026-04-29 14:24:37,621 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 23 minutes, 27 seconds. Time passed: 5 minutes, 45 seconds
+2026-04-29 14:24:38,417 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/bvme_only_mpe/MAgent-Test/20260429_141850/models/100025
+2026-04-29 14:26:03,980 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     125000 | Episode:     5000
+aux_loss:                 17.9669	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                28.5044	kl_loss:                  31.1002	loss:                     34.4623	q_loss:                    1.5655
+q_taken_mean:              2.8246	return_mean:             -32.1691	return_std:                5.4173	target_mean:               2.8573
+td_error_abs:              0.9020	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -41.0573
+test_return_std:           7.5842	
+2026-04-29 14:26:04,067 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 125025 / 500000
+2026-04-29 14:26:04,067 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 21 minutes, 36 seconds. Time passed: 7 minutes, 11 seconds
+2026-04-29 14:27:29,932 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     150000 | Episode:     6000
+aux_loss:                 17.3311	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                31.6727	kl_loss:                  31.1102	loss:                     34.3646	q_loss:                    1.5214
+q_taken_mean:              2.9773	return_mean:             -32.3459	return_std:                5.5378	target_mean:               2.9693
+td_error_abs:              0.9112	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -33.6607
+test_return_std:           5.6216	
+2026-04-29 14:27:30,021 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 150025 / 500000
+2026-04-29 14:27:30,022 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 20 minutes, 3 seconds. Time passed: 8 minutes, 37 seconds
+2026-04-29 14:27:30,819 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/bvme_only_mpe/MAgent-Test/20260429_141850/models/150025
+2026-04-29 14:28:55,677 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     175000 | Episode:     7000
+aux_loss:                 16.4931	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                35.2430	kl_loss:                  31.1140	loss:                     34.1984	q_loss:                    1.4351
+q_taken_mean:              2.3593	return_mean:             -32.1491	return_std:                5.8153	target_mean:               2.3224
+td_error_abs:              0.8551	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -31.7457
+test_return_std:           5.3438	
+2026-04-29 14:28:55,763 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 175025 / 500000
+2026-04-29 14:28:55,763 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 18 minutes, 34 seconds. Time passed: 10 minutes, 3 seconds
+2026-04-29 14:30:21,353 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     200000 | Episode:     8000
+aux_loss:                 16.2262	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                32.9290	kl_loss:                  31.1067	loss:                     34.0642	q_loss:                    1.3348
+q_taken_mean:              2.0636	return_mean:             -31.8900	return_std:                5.6865	target_mean:               2.0162
+td_error_abs:              0.7809	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -31.5347
+test_return_std:           5.2814	
+2026-04-29 14:30:21,447 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 200025 / 500000
+2026-04-29 14:30:21,448 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 17 minutes, 8 seconds. Time passed: 11 minutes, 29 seconds
+2026-04-29 14:30:22,259 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/bvme_only_mpe/MAgent-Test/20260429_141850/models/200025
+2026-04-29 14:31:49,990 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     225000 | Episode:     9000
+aux_loss:                 17.5063	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                32.7228	kl_loss:                  31.1104	loss:                     34.0901	q_loss:                    1.2291
+q_taken_mean:              1.8978	return_mean:             -31.4692	return_std:                5.4044	target_mean:               1.8935
+td_error_abs:              0.7274	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -31.3708
+test_return_std:           5.3944	
+2026-04-29 14:31:50,074 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 225025 / 500000
+2026-04-29 14:31:50,075 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 16 minutes, 14 seconds. Time passed: 12 minutes, 57 seconds
+2026-04-29 14:33:17,149 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     250000 | Episode:    10000
+aux_loss:                 17.7905	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                33.4100	kl_loss:                  31.1127	loss:                     34.0492	q_loss:                    1.1574
+q_taken_mean:              1.7842	return_mean:             -31.1924	return_std:                5.1870	target_mean:               1.8205
+td_error_abs:              0.7185	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -31.2868
+test_return_std:           5.3258	
+2026-04-29 14:33:17,242 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 250025 / 500000
+2026-04-29 14:33:17,242 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 14 minutes, 31 seconds. Time passed: 14 minutes, 25 seconds
+2026-04-29 14:33:18,054 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/bvme_only_mpe/MAgent-Test/20260429_141850/models/250025
+2026-04-29 14:34:44,098 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     275000 | Episode:    11000
+aux_loss:                 17.3909	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                29.1994	kl_loss:                  31.1070	loss:                     33.9180	q_loss:                    1.0719
+q_taken_mean:              1.8674	return_mean:             -30.8956	return_std:                5.1013	target_mean:               1.8946
+td_error_abs:              0.7265	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -30.9664
+test_return_std:           5.2239	
+2026-04-29 14:34:44,185 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 275025 / 500000
+2026-04-29 14:34:44,185 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 13 minutes, 2 seconds. Time passed: 15 minutes, 52 seconds
+2026-04-29 14:36:11,210 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     300000 | Episode:    12000
+aux_loss:                 17.0606	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                25.7722	kl_loss:                  31.1042	loss:                     33.8458	q_loss:                    1.0356
+q_taken_mean:              2.0878	return_mean:             -30.6975	return_std:                4.9928	target_mean:               2.1053
+td_error_abs:              0.7348	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -30.6066
+test_return_std:           5.1669	
+2026-04-29 14:36:11,302 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 300025 / 500000
+2026-04-29 14:36:11,303 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 11 minutes, 36 seconds. Time passed: 17 minutes, 19 seconds
+2026-04-29 14:36:12,116 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/bvme_only_mpe/MAgent-Test/20260429_141850/models/300025
+2026-04-29 14:37:39,289 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     325000 | Episode:    13000
+aux_loss:                 16.6142	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                28.1484	kl_loss:                  31.1068	loss:                     33.8300	q_loss:                    1.0618
+q_taken_mean:              2.1760	return_mean:             -30.2420	return_std:                4.8981	target_mean:               2.2111
+td_error_abs:              0.7465	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -30.6556
+test_return_std:           5.0159	
+2026-04-29 14:37:39,376 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 325025 / 500000
+2026-04-29 14:37:39,377 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 10 minutes, 16 seconds. Time passed: 18 minutes, 47 seconds
+2026-04-29 14:39:07,054 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     350000 | Episode:    14000
+aux_loss:                 17.1286	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                28.8573	kl_loss:                  31.1008	loss:                     33.8757	q_loss:                    1.0620
+q_taken_mean:              2.0684	return_mean:             -30.1019	return_std:                4.8652	target_mean:               2.1155
+td_error_abs:              0.7342	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -30.4405
+test_return_std:           4.8470	
+2026-04-29 14:39:07,148 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 350025 / 500000
+2026-04-29 14:39:07,148 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 8 minutes, 46 seconds. Time passed: 20 minutes, 14 seconds
+2026-04-29 14:39:07,974 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/bvme_only_mpe/MAgent-Test/20260429_141850/models/350025
+2026-04-29 14:40:34,072 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     375000 | Episode:    15000
+aux_loss:                 17.2409	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                27.5716	kl_loss:                  31.0991	loss:                     34.0344	q_loss:                    1.2112
+q_taken_mean:              2.1804	return_mean:             -29.6760	return_std:                4.6169	target_mean:               2.2203
+td_error_abs:              0.7716	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -30.3910
+test_return_std:           4.9807	
+2026-04-29 14:40:34,158 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 375025 / 500000
+2026-04-29 14:40:34,158 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 7 minutes, 14 seconds. Time passed: 21 minutes, 41 seconds
+2026-04-29 14:42:00,719 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     400000 | Episode:    16000
+aux_loss:                 16.8443	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                27.9509	kl_loss:                  31.1018	loss:                     34.0380	q_loss:                    1.2517
+q_taken_mean:              2.3761	return_mean:             -29.4876	return_std:                4.6426	target_mean:               2.4086
+td_error_abs:              0.7892	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -30.2545
+test_return_std:           5.0291	
+2026-04-29 14:42:00,809 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 400025 / 500000
+2026-04-29 14:42:00,809 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 5 minutes, 46 seconds. Time passed: 23 minutes, 8 seconds
+2026-04-29 14:42:01,615 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/bvme_only_mpe/MAgent-Test/20260429_141850/models/400025
+2026-04-29 14:43:27,359 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     425000 | Episode:    17000
+aux_loss:                 15.9420	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                28.9485	kl_loss:                  31.0978	loss:                     33.8797	q_loss:                    1.1877
+q_taken_mean:              2.4161	return_mean:             -29.0984	return_std:                4.6650	target_mean:               2.4651
+td_error_abs:              0.7879	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -29.9501
+test_return_std:           4.8331	
+2026-04-29 14:43:27,446 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 425025 / 500000
+2026-04-29 14:43:27,447 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 4 minutes, 19 seconds. Time passed: 24 minutes, 35 seconds
+2026-04-29 14:44:54,527 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     450000 | Episode:    18000
+aux_loss:                 15.8456	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                27.2164	kl_loss:                  31.0970	loss:                     33.8346	q_loss:                    1.1530
+q_taken_mean:              2.4435	return_mean:             -28.7184	return_std:                4.5256	target_mean:               2.4888
+td_error_abs:              0.7828	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -29.1990
+test_return_std:           4.6244	
+2026-04-29 14:44:54,617 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 450025 / 500000
+2026-04-29 14:44:54,617 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 2 minutes, 54 seconds. Time passed: 26 minutes, 2 seconds
+2026-04-29 14:44:55,425 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/bvme_only_mpe/MAgent-Test/20260429_141850/models/450025
+2026-04-29 14:46:22,037 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     475000 | Episode:    19000
+aux_loss:                 15.8426	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                33.4720	kl_loss:                  31.1148	loss:                     33.8644	q_loss:                    1.1653
+q_taken_mean:              2.9068	return_mean:             -28.0796	return_std:                4.2173	target_mean:               2.9539
+td_error_abs:              0.7739	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -29.2314
+test_return_std:           4.6412	
+2026-04-29 14:46:22,131 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 475025 / 500000
+2026-04-29 14:46:22,132 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: 1 minutes, 27 seconds. Time passed: 27 minutes, 29 seconds
+2026-04-29 14:47:50,218 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Recent Stats | t_env:     500000 | Episode:    20000
+aux_loss:                 16.5345	ep_length_mean:           25.0000	episode_length_mean:      25.0000	epsilon:                   0.0500
+grad_norm:                35.7510	kl_loss:                  31.1117	loss:                     34.0820	q_loss:                    1.3168
+q_taken_mean:              3.0169	return_mean:             -27.7450	return_std:                4.2237	target_mean:               3.0809
+td_error_abs:              0.8136	test_ep_length_mean:      25.0000	test_episode_length_mean: 25.0000	test_return_mean:        -28.8962
+test_return_std:           4.5599	
+2026-04-29 14:47:50,310 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - t_env: 500025 / 500000
+2026-04-29 14:47:50,311 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Estimated time left: -. Time passed: 28 minutes, 58 seconds
+2026-04-29 14:47:51,126 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Saving models to work_dirs/ExpoComm-B/bvme_only_mpe/MAgent-Test/20260429_141850/models/500025
+2026-04-29 14:47:51,133 - ExpoComm-B - bvme_only_mpe - MAgent-Test - INFO - Finished Training
+Exiting Main
+Stopping all threads
+Thread wandb-AsyncioManager-main is alive! Is daemon: True
+Thread joined
+Thread ChkStopThr is alive! Is daemon: True
+Thread joined
+Thread IntMsgThr is alive! Is daemon: True
+Thread joined
+Exiting script
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mMAgent-Test-bvme_only_mpe-20260429_141850[0m at: [34mhttps://wandb.ai/vt20-rice-university/ExpoComm-B/runs/wmevb3bo[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/run-20260429_141851-wmevb3bo/logs[0m
+>>> ALL DONE: Wed Apr 29 02:47:54 PM CDT 2026
