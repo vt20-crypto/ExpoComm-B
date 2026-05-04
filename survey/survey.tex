@@ -1,0 +1,288 @@
+\documentclass{article}
+
+\usepackage[final]{neurips_2020}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{tabularx}
+
+\title{Reinforcement Learning on Graphs: A Survey}
+
+\author{
+  Ansh Dabral \\
+  \texttt{ad258} \\
+  \And
+  Aneesh Thatiparti \\
+  \texttt{vt20} \\
+  \And
+  Madhu Thatiparti \\
+  \texttt{mt180} \\
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Reinforcement learning (RL) has achieved remarkable success in domains with fixed, grid-like state spaces, yet many real-world problems---transportation networks, power grids, molecular structures, and multi-robot systems---are naturally represented as graphs with irregular topology and variable size. \emph{Graph Reinforcement Learning} (GRL) integrates Graph Neural Networks (GNNs) with RL agents to capture relational inductive biases and enable size-invariant generalization. In this survey we review fifteen recent papers spanning four application domains: combinatorial optimization, infrastructure and network control, multi-agent coordination, and autonomous navigation. We propose a unified taxonomy that decomposes GRL methods along three axes---graph representation, GNN architecture, and RL algorithm---and provide a comparative analysis highlighting trade-offs in scalability, safety, and generalization. We conclude by identifying open challenges including sim-to-real transfer, safety guarantees, and theoretical foundations for GRL on sparse and heterogeneous graphs.
+\end{abstract}
+
+%======================================================================
+\section{Introduction}
+%======================================================================
+
+Reinforcement learning (RL) trains agents to make sequential decisions by maximizing cumulative reward through trial-and-error interaction with an environment~\cite{sutton2018reinforcement}. Classic RL architectures---multilayer perceptrons (MLPs) and convolutional neural networks (CNNs)---assume fixed-dimensional, often grid-structured inputs. However, many consequential decision-making problems are defined over \emph{graphs}: road networks for vehicle routing, electrical grids for power dispatch, factory floors for job scheduling, and communication topologies for multi-agent coordination. These domains exhibit two properties that challenge standard RL: (i)~\emph{relational structure}, where the interactions between entities are as important as entity features, and (ii)~\emph{variable topology}, where the number of nodes and edges changes across problem instances.
+
+Graph Neural Networks (GNNs)~\cite{mudigonda2022grl_survey} address both challenges through message-passing mechanisms that aggregate neighbor information while remaining permutation-equivariant and size-agnostic. Integrating GNNs into the RL pipeline---as state encoders, policy networks, or value functions---yields \emph{Graph Reinforcement Learning} (GRL), a rapidly growing paradigm that promises to unlock RL for structurally complex, real-world problems.
+
+This survey examines fifteen recent papers that collectively span the GRL landscape. We organize them into four application domains: \emph{combinatorial optimization} (\S\ref{sec:co}), \emph{infrastructure and network control} (\S\ref{sec:infra}), \emph{multi-agent systems} (\S\ref{sec:marl}), and \emph{autonomous navigation} (\S\ref{sec:nav}). For each domain, we describe representative methods and compare their design choices. Section~\ref{sec:comparison} provides a cross-cutting comparative analysis, and Section~\ref{sec:future} discusses open problems and future directions.
+
+%======================================================================
+\section{Background}\label{sec:bg}
+%======================================================================
+
+\paragraph{Reinforcement Learning.}
+An RL problem is typically formalized as a Markov Decision Process (MDP) $\langle \mathcal{S}, \mathcal{A}, P, R, \gamma \rangle$. At each time step the agent observes state $s \in \mathcal{S}$, selects action $a \in \mathcal{A}$ according to policy $\pi(a|s)$, receives reward $R(s,a)$, and transitions to $s'$ with probability $P(s'|s,a)$. The objective is to find $\pi^*$ maximizing the expected discounted return $\mathbb{E}[\sum_{t=0}^{\infty}\gamma^t R_t]$. Key algorithm families include value-based methods (DQN, Q-learning), policy gradient methods (REINFORCE, PPO), and actor-critic hybrids (A2C, MAPPO).
+
+\paragraph{Graph Neural Networks.}
+GNNs operate on a graph $G=(V,E)$ with node features $\mathbf{x}_v$ and optional edge features $\mathbf{e}_{uv}$. In the message-passing framework, each layer updates node representations via:
+\begin{equation}
+\mathbf{h}_v^{(l+1)} = \text{UPDATE}\!\left(\mathbf{h}_v^{(l)},\; \bigoplus_{u \in \mathcal{N}(v)} \text{MSG}\!\left(\mathbf{h}_v^{(l)}, \mathbf{h}_u^{(l)}, \mathbf{e}_{uv}\right)\right),
+\end{equation}
+where $\bigoplus$ is a permutation-invariant aggregation (sum, mean, or max). Common architectures include Graph Convolutional Networks (GCN), Graph Attention Networks (GAT), and heterogeneous variants that assign distinct message functions to different node and edge types.
+
+\paragraph{GRL Integration Patterns.}
+GNNs enter the RL pipeline in three principal ways: (1)~as \emph{state encoders} that map a graph-structured observation to a latent vector consumed by an MLP policy, (2)~as \emph{policy networks} that directly output per-node or per-edge action logits, and (3)~as \emph{value networks} that estimate $V(s)$ or $Q(s,a)$ while respecting graph symmetry. This flexibility allows GRL to address problems where the action space, the state space, or both are graph-structured.
+
+%======================================================================
+\section{Combinatorial Optimization on Graphs}\label{sec:co}
+%======================================================================
+
+Combinatorial optimization (CO) problems on graphs---vehicle routing, job-shop scheduling, graph partitioning---are typically NP-hard, making exact solvers intractable at scale. GRL has emerged as a compelling alternative that \emph{learns} construction or improvement heuristics end-to-end.
+
+\paragraph{Foundational Taxonomy.}
+Berto et al.~\cite{berto2024grl_co} provide a unifying perspective on GRL for CO, distinguishing between \emph{structure optimization} (finding an optimal graph, e.g., network design) and \emph{process optimization} (finding an optimal policy on a fixed graph, e.g., routing). They formalize both as sequential graph construction problems where a GNN encodes the partial solution and an RL agent extends it one node or edge at a time. This constructive framing unifies methods that previously appeared disparate and clarifies when autoregressive decoders are preferable to one-shot predictors.
+
+\paragraph{Vehicle Routing.}
+The Extended Graph Attention Model (EGAM)~\cite{egam2026} generalizes the seminal Graph Attention Model (GAM) by embedding both nodes \emph{and} edges via multi-head dot-product attention. Trained with REINFORCE and a learned baseline, EGAM matches or outperforms prior neural CO solvers on the Travelling Salesman Problem (TSP) and Capacitated VRP, with particularly strong gains on highly constrained variants where edge features (e.g., time windows, capacity limits) are critical. Complementing this line, Pham et al.~\cite{qgat2025} propose a \emph{Quantum} Graph Attention Network (Q-GAT) that replaces MLP readout layers with parameterized quantum circuits, reducing trainable parameters by over 50\% while achieving $\sim$5\% lower routing cost than classical GAT under PPO training. Although current quantum hardware limits practical deployment, Q-GAT demonstrates that parameter-efficient hybrid architectures can match classical expressiveness.
+
+\paragraph{Job-Shop Scheduling.}
+Zhang et al.~\cite{gnn_jssp2024} survey GNN-based methods for Job-Shop Scheduling Problems (JSSPs), where operations are nodes in a disjunctive graph and edges encode precedence and machine constraints. They identify a dominant paradigm: a heterogeneous GNN encodes the disjunctive graph, and a DRL agent (typically PPO) selects dispatching rules or directly sequences operations. Key challenges include handling heterogeneity (machines with different capabilities) and scaling to instances with thousands of operations, where hierarchical GNN architectures show promise.
+
+%======================================================================
+\section{Infrastructure and Network Control}\label{sec:infra}
+%======================================================================
+
+Infrastructure networks---power grids, transportation systems---are natural graphs where GRL can learn adaptive control policies that generalize across network topologies.
+
+\paragraph{Power Grid Management.}
+Raissi et al.~\cite{grl_power2025} systematically review GNN-RL approaches for both transmission and distribution grids. The power network is modeled as a graph whose nodes are buses and whose edges are transmission lines, with node features encoding power injection, voltage, and load. GNN-based policies learn remedial actions (line switching, generator redispatch) that adapt to contingencies such as line faults or renewable generation fluctuations. The survey highlights that while GRL achieves promising results in simulated environments (e.g., Grid2Op), \emph{safety guarantees} remain a critical gap: learned policies can violate thermal limits or voltage constraints, and existing constraint-handling mechanisms (penalty shaping, projection layers) are insufficient for real-world deployment. This observation motivates the integration of formal safety filters, a theme that recurs in navigation (\S\ref{sec:nav}).
+
+\paragraph{Traffic-Aware Taxi Placement.}
+Sharma et al.~\cite{taxi2026} encode an urban road network as a graph where intersections are nodes with features capturing historical demand, event proximity, and real-time congestion scores from live traffic APIs. GNN embeddings feed a Q-learning agent that recommends optimal taxi hotspots, jointly optimizing passenger waiting time, driver travel distance, and congestion avoidance. Experiments on a simulated Delhi dataset show 56\% reduction in passenger waiting time versus stochastic baselines. This work illustrates how GRL can incorporate dynamic, heterogeneous node attributes from external data sources.
+
+\paragraph{Mean-Field Control on Sparse Graphs.}
+Lacker et al.~\cite{mfc_sparse2026} establish a rigorous theoretical foundation for RL on large sparse networks. Classical mean-field control (MFC) assumes dense, all-to-all interactions---unrealistic for most infrastructure networks. The authors redefine system state as a probability measure over decorated rooted neighborhoods and prove \emph{horizon-dependent locality}: an agent's optimal policy at time $t$ depends only on its $(T{-}t)$-hop neighborhood. This locality result formally justifies using GNNs as actor-critic networks for scalable control and provides convergence guarantees as the network size grows, bridging the gap between practical GRL algorithms and their theoretical underpinnings.
+
+%======================================================================
+\section{Multi-Agent Graph RL}\label{sec:marl}
+%======================================================================
+
+Multi-agent RL (MARL) on graphs addresses settings where agents interact through a communication or spatial graph, and the challenge is to learn decentralized policies that coordinate effectively.
+
+\paragraph{Credit Assignment via Diffusion.}
+Bargiacchi et al.~\cite{dvf2026} tackle the credit assignment problem in graph-based MDPs (GMDPs). They introduce the \emph{Diffusion Value Function} (DVF), which assigns each agent a local value by diffusing rewards over the influence graph with temporal discounting and spatial attenuation. DVF admits a Bellman fixed point and decomposes the global value via an averaging property, enabling principled per-agent learning signals. Combined with a sparse message-passing actor (Learned DropEdge GNN), the resulting Diffusion A2C (DA2C) algorithm outperforms both local and global critic baselines by up to 11\% average reward on firefighting and distributed computation benchmarks. DVF is a drop-in replacement for standard critics and scales linearly with the number of agents.
+
+\paragraph{Heterogeneous Multi-Robot Search.}
+Wang et al.~\cite{dahgnn2026} address multi-robot collaborative area search, where robots must balance exploring unknown areas with covering specific rescue targets. They construct a \emph{heterogeneous graph} with three node types (robots, frontiers, points of interest) and propose a Dual-Attention Heterogeneous GNN (DA-HGNN). The dual-attention mechanism comprises \emph{relational-aware attention} (capturing spatio-temporal relationships among entities) and \emph{type-aware attention} (separately computing relevance between robots and each goal type), effectively decoupling exploration from coverage. Trained with DRL in the iGibson simulator, DA-HGNN demonstrates superior scalability: policies trained on small teams generalize to larger teams without retraining.
+
+\paragraph{Hierarchical Emergency Corridor Formation.}
+Chen et al.~\cite{hier_gnn2026} coordinate connected vehicles to form emergency corridors. Their hierarchical framework uses a high-level GNN planner for global strategy and low-level controllers for trajectory execution. Graph attention networks enable scaling to variable numbers of agents. Trained via MAPPO, the system reduces emergency vehicle travel time by 28.3\% compared to baselines while maintaining a near-zero collision rate (0.3\%) and preserving 81\% of background traffic efficiency. The hierarchical decomposition---global coordination via GNN plus local control via per-agent policies---is a recurring and effective architectural pattern in GRL for multi-agent systems.
+
+%======================================================================
+\section{Autonomous Navigation and Planning}\label{sec:nav}
+%======================================================================
+
+Navigation tasks require agents to plan paths through environments that can be modeled as spatial graphs, where safety and social awareness are paramount.
+
+\paragraph{Safe Exploration with Graph Attention.}
+Acerbo et al.~\cite{safe_explore2025} integrate a GNN-based policy for waypoint selection with an explicit safety filter guaranteeing collision-free exploration. The GNN processes a spatial graph of candidate waypoints, and the PPO-trained policy selects the next target; if the proposed waypoint leads to a collision trajectory, the safety filter overrides it with the closest feasible alternative. A potential-field-based reward accounts for proximity to unexplored regions and expected information gain. This \emph{learning + safety filter} architecture is significant because it decouples performance optimization (handled by RL) from constraint satisfaction (handled by the filter), enabling deployment on real robotic platforms in cluttered environments.
+
+\paragraph{Socially Aware Robot Navigation.}
+Chandra et al.~\cite{social_nav2025} survey DRL approaches for socially aware navigation, where robots must respect implicit human social norms (proxemics, right-of-way conventions). Among the architectures reviewed, graph-based methods that model pedestrians as nodes in a dynamic interaction graph show strong performance on social metrics. However, the survey identifies critical bottlenecks: lack of standardized social metrics, limited sim-to-real transfer, and computational burdens that restrict scalability. These findings underscore that GRL for navigation requires not only algorithmic advances but also community investment in evaluation infrastructure.
+
+\paragraph{General Policy Learning.}
+Stahlberg et al.~\cite{gen_policies2025} combine GNNs with policy gradient methods to learn domain-independent planning policies that generalize across all instances of a given planning domain. By modeling policies as state-transition classifiers (rather than ground-action selectors) and using GNNs to encode relational planning states, actor-critic methods achieve generalization competitive with combinatorial planners while avoiding their scalability bottleneck. The authors identify that limitations stem not from RL algorithms but from well-understood GNN expressiveness bounds and the inherent optimality-generalization trade-off, both addressable by adding derived predicates.
+
+\paragraph{Graph Contextual Controller Synthesis.}
+Wang et al.~\cite{gcrl2025} apply GNNs to formal controller synthesis, encoding the history of Labeled Transition System (LTS) exploration as a graph. The resulting Graph Contextual RL (GCRL) agent captures broader, non-local context compared to methods relying only on current-state features. GCRL outperforms state-of-the-art methods in four of five benchmark domains, with the exception being a domain with high symmetry and strictly local interactions---precisely where local features suffice. This result reinforces that GNN-based context is most beneficial when long-range dependencies exist in the exploration graph.
+
+%======================================================================
+\section{Comparative Analysis}\label{sec:comparison}
+%======================================================================
+
+Table~\ref{tab:comparison} summarizes the surveyed methods along key design dimensions. Several cross-cutting themes emerge from this analysis.
+
+\begin{table}[t]
+\caption{Comparative summary of surveyed GRL methods.}
+\label{tab:comparison}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{2.2cm}p{1.6cm}p{1.8cm}p{1.5cm}p{1.2cm}p{1.2cm}p{1.5cm}@{}}
+\toprule
+\textbf{Method} & \textbf{Domain} & \textbf{GNN Type} & \textbf{RL Algo} & \textbf{Scale} & \textbf{Safety} & \textbf{General.} \\
+\midrule
+Mudigonda~\cite{mudigonda2022grl_survey} & General & Various & Various & -- & \texttimes & -- \\
+Berto~\cite{berto2024grl_co} & CO & Various & Various & -- & \texttimes & -- \\
+EGAM~\cite{egam2026} & Routing & GAT+Edge & REINFORCE & Med & \texttimes & Med \\
+Q-GAT~\cite{qgat2025} & Routing & Quantum GAT & PPO & Med & \texttimes & Med \\
+Zhang~\cite{gnn_jssp2024} & Scheduling & Het.~GNN & PPO/DQN & High & \texttimes & Med \\
+Raissi~\cite{grl_power2025} & Power Grid & GCN/GAT & Various & High & Partial & Low \\
+Taxi~\cite{taxi2026} & Transport & GNN+Q-learn & DQN & Med & \texttimes & Low \\
+MFC~\cite{mfc_sparse2026} & Networks & GNN (theory) & A-C & High & \texttimes & High \\
+DVF~\cite{dvf2026} & MARL & DropEdge GNN & A2C & High & \texttimes & High \\
+DA-HGNN~\cite{dahgnn2026} & Multi-Robot & Het.~Dual-Att & DRL & High & \texttimes & High \\
+Hier.~GNN~\cite{hier_gnn2026} & Traffic & GAT (Hier.) & MAPPO & High & High & Med \\
+Safe Expl.~\cite{safe_explore2025} & Navigation & GAT & PPO & Med & High & Med \\
+Social Nav~\cite{social_nav2025} & Navigation & Various & Various & Low & Partial & Low \\
+Gen.~Policy~\cite{gen_policies2025} & Planning & Relational GNN & A-C & High & \texttimes & High \\
+GCRL~\cite{gcrl2025} & Synthesis & GNN & RL & Med & \texttimes & High \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Scalability and Size Generalization.}
+A primary motivation for GRL is size-invariant generalization: policies trained on small graphs should transfer to larger instances. Methods that achieve this most successfully---DVF~\cite{dvf2026}, DA-HGNN~\cite{dahgnn2026}, and MFC~\cite{mfc_sparse2026}---share a common design principle: \emph{locality}. By ensuring that each agent's computation depends only on a bounded neighborhood, these methods avoid the curse of dimensionality that plagues centralized approaches. The mean-field theoretical results of~\cite{mfc_sparse2026} provide formal backing for this intuition.
+
+\paragraph{Safety.}
+Only two of the fifteen methods explicitly address safety: the safety-filter architecture of~\cite{safe_explore2025} and the near-zero-collision hierarchical framework of~\cite{hier_gnn2026}. The power grid survey~\cite{grl_power2025} and social navigation survey~\cite{social_nav2025} both highlight safety as a critical unresolved challenge. The emerging pattern is to \emph{decouple} learning from constraint enforcement, using GRL for performance optimization and a separate formal mechanism (safety filter, constrained optimization, or shielding) for safety.
+
+\paragraph{Heterogeneous vs.\ Homogeneous Graphs.}
+Problems with multiple entity types (robots, targets, and frontiers in~\cite{dahgnn2026}; machines and operations in~\cite{gnn_jssp2024}) benefit from heterogeneous GNNs that assign type-specific message functions. Dual-attention mechanisms~\cite{dahgnn2026} and disjunctive-graph encodings~\cite{gnn_jssp2024} show that modeling heterogeneity explicitly improves both sample efficiency and final performance.
+
+\paragraph{Attention Mechanisms.}
+Graph attention---in standard (GAT), extended (EGAM), dual (DA-HGNN), or hierarchical (emergency corridors) forms---is the dominant GNN variant across all domains. Attention enables adaptive, context-dependent message weighting, which is particularly valuable in RL where the relevance of neighbors changes with the agent's goal and progress.
+
+%======================================================================
+\section{Open Problems and Future Directions}\label{sec:future}
+%======================================================================
+
+\paragraph{Sim-to-Real Transfer.}
+Most GRL methods are evaluated in simulation. The social navigation survey~\cite{social_nav2025} and power grid survey~\cite{grl_power2025} explicitly flag sim-to-real transfer as a bottleneck. Domain randomization, system identification, and hybrid sim-real training are promising but under-explored in the GRL context, where graph structure itself may differ between simulation and reality.
+
+\paragraph{Formal Safety Guarantees.}
+The safety-filter approach of~\cite{safe_explore2025} is a step forward, but extending formal guarantees (e.g., from control barrier functions or shielding) to GRL on dynamic, large-scale graphs remains open. Integrating constrained MDP formulations with GNN-based policies is a natural next step.
+
+\paragraph{Theoretical Foundations.}
+The locality results of~\cite{mfc_sparse2026} and the Bellman-decomposition properties of DVF~\cite{dvf2026} are early theoretical contributions. Open questions include: \emph{When do GNN-based policies provably converge?} \emph{What graph properties determine the approximation quality of $k$-hop GNN encoders?} Connecting GRL to the Weisfeiler-Leman hierarchy and spectral graph theory could yield principled architecture choices.
+
+\paragraph{Dynamic and Temporal Graphs.}
+Many real-world graphs evolve over time (e.g., traffic networks, social interactions). Current GRL methods largely treat graphs as static snapshots. Incorporating temporal graph networks or recurrent GNN layers could improve performance in dynamic settings.
+
+\paragraph{Standardized Benchmarks.}
+The lack of unified benchmarks hampers fair comparison. While Grid2Op exists for power grids and standard TSP/VRP instances exist for routing, multi-agent and navigation domains lack agreed-upon evaluation protocols. Community-driven benchmark suites would accelerate progress.
+
+%======================================================================
+\section{Conclusion}
+%======================================================================
+
+Graph Reinforcement Learning is a vibrant and rapidly maturing field that brings together the relational inductive biases of GNNs with the sequential decision-making capabilities of RL. Our survey of fifteen recent papers reveals a coherent set of design principles---locality for scalability, attention for adaptive aggregation, heterogeneous representations for complex domains, and decoupled safety mechanisms---that recur across application areas from combinatorial optimization to multi-robot coordination. At the same time, significant challenges remain in sim-to-real transfer, formal safety guarantees, and theoretical understanding. Addressing these will be essential for transitioning GRL from proof-of-concept to real-world deployment.
+
+\bibliographystyle{plain}
+
+\begin{thebibliography}{15}
+
+\bibitem{sutton2018reinforcement}
+R.~S. Sutton and A.~G. Barto.
+\newblock \emph{Reinforcement Learning: An Introduction}.
+\newblock MIT Press, 2nd edition, 2018.
+
+\bibitem{mudigonda2022grl_survey}
+M.~Mudigonda, R.~Zheng, et~al.
+\newblock Reinforcement learning on graphs: A survey.
+\newblock \emph{arXiv preprint arXiv:2204.06127}, 2022.
+
+\bibitem{berto2024grl_co}
+F.~Berto, C.~Hua, et~al.
+\newblock Graph reinforcement learning for combinatorial optimization: A survey and unifying perspective.
+\newblock \emph{arXiv preprint arXiv:2404.06492}, 2024.
+
+\bibitem{grl_power2025}
+M.~Raissi, A.~Hassanzadeh, et~al.
+\newblock Graph reinforcement learning for power grids: A comprehensive survey.
+\newblock \emph{Energy and AI}, 2025.
+\newblock arXiv:2407.04522.
+
+\bibitem{gnn_jssp2024}
+C.~Zhang, W.~Song, et~al.
+\newblock Graph neural networks for job shop scheduling problems: A survey.
+\newblock \emph{arXiv preprint arXiv:2406.14096}, 2024.
+
+\bibitem{dvf2026}
+A.~Bargiacchi, D.~Bhatt, et~al.
+\newblock Factored value functions for graph-based multi-agent reinforcement learning.
+\newblock \emph{arXiv preprint arXiv:2601.11401}, 2026.
+
+\bibitem{dahgnn2026}
+Y.~Wang, Z.~Li, et~al.
+\newblock Dual-attention heterogeneous {GNN} for multi-robot collaborative area search via deep reinforcement learning.
+\newblock \emph{arXiv preprint arXiv:2601.03686}, 2026.
+
+\bibitem{hier_gnn2026}
+X.~Chen, J.~Zhang, et~al.
+\newblock Hierarchical {GNN}-based multi-agent learning for dynamic queue-jump lane and emergency vehicle corridor formation.
+\newblock \emph{arXiv preprint arXiv:2601.04177}, 2026.
+
+\bibitem{mfc_sparse2026}
+D.~Lacker, A.~Muhle, et~al.
+\newblock Mean-field control on sparse graphs: From local limits to {GNNs} via neighborhood distributions.
+\newblock \emph{arXiv preprint arXiv:2601.21477}, 2026.
+
+\bibitem{egam2026}
+Extended graph attention model for solving routing problems.
+\newblock \emph{arXiv preprint arXiv:2601.21281}, 2026.
+
+\bibitem{gen_policies2025}
+M.~Stahlberg, B.~Bonet, and H.~Geffner.
+\newblock Learning general policies with policy gradient methods.
+\newblock \emph{arXiv preprint arXiv:2512.19366}, 2025.
+
+\bibitem{qgat2025}
+Q.~Pham, T.~V.~Pham, et~al.
+\newblock Vehicle routing problems via quantum graph attention network deep reinforcement learning.
+\newblock In \emph{Proc. SOICT}, 2025.
+\newblock arXiv:2511.15175.
+
+\bibitem{safe_explore2025}
+F.~Acerbo, et~al.
+\newblock Platform-agnostic reinforcement learning framework for safe exploration of cluttered environments with graph attention.
+\newblock \emph{arXiv preprint arXiv:2511.15358}, 2025.
+
+\bibitem{taxi2026}
+R.~Sharma, et~al.
+\newblock Traffic-aware optimal taxi placement using graph neural network-based reinforcement learning.
+\newblock \emph{arXiv preprint arXiv:2601.00607}, 2026.
+
+\bibitem{social_nav2025}
+R.~Chandra, et~al.
+\newblock Socially aware navigation for mobile robots: A survey on deep reinforcement learning approaches.
+\newblock \emph{arXiv preprint arXiv:2512.00049}, 2025.
+
+\bibitem{gcrl2025}
+Z.~Wang, S.~Uchitel, and N.~D'Ippolito.
+\newblock Graph contextual reinforcement learning for efficient directed controller synthesis.
+\newblock \emph{arXiv preprint arXiv:2512.15295}, 2025.
+
+\end{thebibliography}
+
+\end{document}
