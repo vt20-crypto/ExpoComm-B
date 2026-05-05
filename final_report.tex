@@ -26,7 +26,7 @@
 \maketitle
 
 \begin{abstract}
-Cooperative multi-agent reinforcement learning (MARL) requires agents to coordinate under partial observability via communication. Most existing methods optimize only the communication \textit{topology} (who talks to whom) while assuming unlimited per-message bandwidth---an unrealistic assumption in real deployments such as drone swarms and robot fleets. We present \textbf{ExpoComm-B}, which jointly optimizes topology and bandwidth by integrating the Bandwidth-constrained Variational Message Encoding (BVME) bottleneck into the ExpoComm sparse exponential-graph communication framework. Each inter-agent message is treated as a sample from a learned Gaussian posterior regularized via KL divergence, providing tunable control over per-message information capacity while preserving ExpoComm's $O(\log N)$ connectivity. We evaluate on two benchmarks. On \textbf{MAgent Battle} (81 vs.\ 81 agents), ExpoComm-B ($\sigma_0{=}0.05$) reduces average enemy survivors from 72.4 (QMIX baseline) to 3.6. On \textbf{MPE Simple Spread} (3 agents, 500k steps), ExpoComm-B achieves a final test return of $-8.21$, compared to $-26.60$ (QMIX), $-27.11$ (ExpoComm), and $-28.90$ (BVME-only). Ablation studies show that performance is stable across five orders of KL weight ($\lambda$) and that an 8$\times$ message compression causes only a 0.06-point drop in return.
+Cooperative multi-agent reinforcement learning (MARL) requires agents to coordinate under partial observability via communication. Most existing methods optimize only the communication \textit{topology} (who talks to whom) while assuming unlimited per-message bandwidth---an unrealistic assumption in real deployments such as drone swarms and robot fleets. We present \textbf{ExpoComm-B}, which jointly optimizes topology and bandwidth by integrating the Bandwidth-constrained Variational Message Encoding (BVME) bottleneck into the ExpoComm sparse exponential-graph communication framework. Each inter-agent message is treated as a sample from a learned Gaussian posterior regularized via KL divergence, providing tunable control over per-message information capacity while preserving ExpoComm's $O(\log N)$ connectivity. We evaluate on two benchmarks. On \textbf{MAgent Battle} (81 vs.\ 81 agents), ExpoComm-B ($\sigma_0{=}0.05$) reduces average enemy survivors from 72.4 (QMIX baseline) to 3.6. On \textbf{MPE Simple Spread} (3 agents, 500k steps), ExpoComm-B achieves a final test return of $-8.16$, compared to $-26.60$ (QMIX), $-27.11$ (ExpoComm), and $-28.90$ (BVME-only). Ablation studies show that performance is stable across five orders of KL weight ($\lambda$) and that an 8$\times$ message compression causes only a 0.06-point drop in return.
 \end{abstract}
 
 %──────────────────────────────────────────────────────────────────────────────
@@ -183,7 +183,7 @@ All four runs completed 500,025 steps (target: 500,000).
 QMIX (full-comm, no topology) & \texttt{qmix\_fullcomm\_mpe}  & $-$26.5966 \\
 ExpoComm (sparse, no compress) & \texttt{ExpoComm\_mpe}        & $-$27.1132 \\
 BVME-only (full graph + compress) & \texttt{bvme\_only\_mpe}   & $-$28.8962 \\
-ExpoComm-B ($\lambda=1.0$, $\sigma_0=0.01$, dim=64) & \texttt{ExpoComm\_B\_mpe} & $-$8.2139 \\
+ExpoComm-B ($\lambda=1.0$, $\sigma_0=0.01$, dim=64) & \texttt{ExpoComm\_B\_mpe} & $-$8.1597 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -191,7 +191,7 @@ ExpoComm-B ($\lambda=1.0$, $\sigma_0=0.01$, dim=64) & \texttt{ExpoComm\_B\_mpe} 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.82\textwidth]{mpe_learning_curves.png}
-\caption{MPE Simple Spread learning curves over 500k steps. All 20 evaluation checkpoints (every 25k steps) are plotted per method. ExpoComm-B converges to $-8.21$ vs.\ $-26.60$ to $-28.90$ for baselines.}
+\caption{MPE Simple Spread learning curves over 500k steps. All 20 evaluation checkpoints (every 25k steps) are plotted per method. ExpoComm-B converges to $-8.16$ vs.\ $-26.60$ to $-28.90$ for baselines.}
 \label{fig:mpe_curves}
 \end{figure}
 
@@ -209,10 +209,10 @@ Fixed: $\sigma_0=0.01$, compressed\_dim=64, seed=0. All runs completed 500,025 s
 $\lambda$ & \textbf{Final test\_return\_mean $\uparrow$} & \textbf{Final KL Loss} & \textbf{Source log} \\
 \midrule
 0.01  & $-$8.5074 & 40.27 & \texttt{ablation\_output.log} \\
-0.1   & $-$8.1750 & 31.09 & \texttt{ablation\_nots.log}   \\
-1.0   & $-$8.2139 & 31.09 & \texttt{ablation\_nots.log}   \\
-5.0   & $-$8.4163 & 31.10 & \texttt{ablation\_nots.log}   \\
-10.0  & $-$8.3556 & 31.10 & \texttt{ablation\_nots.log}   \\
+0.1   & $-$8.1625 & 31.09 & \texttt{ablation\_nots.log}   \\
+1.0   & $-$8.1597 & 31.10 & \texttt{ablation\_nots.log}   \\
+5.0   & $-$8.5555 & 31.09 & \texttt{ablation\_nots.log}   \\
+10.0  & $-$8.1377 & 31.09 & \texttt{ablation\_nots.log}   \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -230,10 +230,10 @@ Fixed: $\lambda=1.0$, $\sigma_0=0.01$, seed=0. All runs completed 500,025 steps.
 \toprule
 \textbf{Compressed Dim} & \textbf{Ratio} & \textbf{Final test\_return\_mean $\uparrow$} & \textbf{Final KL Loss} \\
 \midrule
-64 & 1.0   (no reduction) & $-$8.2139 & 31.09 \\
-32 & 0.5   & $-$8.2620 & 31.10 \\
-16 & 0.25  & $-$8.2652 & 31.12 \\
-8  & 0.125 & $-$8.2094 & 31.10 \\
+64 & 1.0   (no reduction) & $-$8.1597 & 31.10 \\
+32 & 0.5   & $-$8.2046 & 31.10 \\
+16 & 0.25  & $-$8.1628 & 31.10 \\
+8  & 0.125 & $-$8.2186 & 31.09 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -242,7 +242,7 @@ Fixed: $\lambda=1.0$, $\sigma_0=0.01$, seed=0. All runs completed 500,025 steps.
 \centering
 \includegraphics[width=0.49\textwidth]{mpe_kl_ablation.png}
 \includegraphics[width=0.49\textwidth]{mpe_cr_ablation.png}
-\caption{\textbf{Left:} KL weight ($\lambda$) ablation. Performance is stable between $-8.17$ and $-8.51$ across five decades of $\lambda$. \textbf{Right:} Compression ratio ablation. All four ratios achieve within 0.06 of each other, with the 8$\times$ compressed model ($-8.2094$) slightly outperforming no compression ($-8.2139$).}
+\caption{\textbf{Left:} KL weight ($\lambda$) ablation. Performance is stable between $-8.14$ and $-8.56$ across five decades of $\lambda$. \textbf{Right:} Compression ratio ablation. All four ratios achieve within 0.06 of each other, demonstrating robust compression tolerance (best: $-8.16$, worst: $-8.22$).}
 \label{fig:ablations}
 \end{figure}
 
@@ -251,13 +251,13 @@ Fixed: $\lambda=1.0$, $\sigma_0=0.01$, seed=0. All runs completed 500,025 steps.
 \label{sec:discussion}
 
 \paragraph{MPE: Why does ExpoComm-B outperform by such a large margin?}
-All three baselines plateau in the $[-27, -29]$ range. ExpoComm-B converges to $-8.21$---a gap of ${\sim}18$ points. The baselines span different topology/compression choices (QMIX: full-comm/uncompressed; ExpoComm: sparse/uncompressed; BVME-only: full-comm/compressed), yet all perform similarly. This suggests that in the 3-agent MPE task, neither topology alone nor compression alone is the critical factor. The joint optimization in ExpoComm-B---where the variational bottleneck learns to compress \textit{only} the most coordination-relevant features along the sparse topology---appears to provide a qualitatively different learning signal.
+All three baselines plateau in the $[-27, -29]$ range. ExpoComm-B converges to $-8.16$---a gap of ${\sim}19$ points. The baselines span different topology/compression choices (QMIX: full-comm/uncompressed; ExpoComm: sparse/uncompressed; BVME-only: full-comm/compressed), yet all perform similarly. This suggests that in the 3-agent MPE task, neither topology alone nor compression alone is the critical factor. The joint optimization in ExpoComm-B---where the variational bottleneck learns to compress \textit{only} the most coordination-relevant features along the sparse topology---appears to provide a qualitatively different learning signal.
 
 \paragraph{MAgent: $\sigma_0=0.05$ is a strong outlier.}
 The $\sigma_0=0.05$ result (3.6 survivors, return $-0.407$) is dramatically better than all other settings. At $\sigma_0=0.05$, the KL loss is 0.35 (nearly zero), meaning the bottleneck imposes almost no compression---messages are essentially uncompressed. This suggests the \textit{topology} (ExpoComm's sparse graph) is the primary driver of performance, with the bottleneck beneficial only when not over-tightened.
 
 \paragraph{Compression ratio is robust.}
-Across 8$\times$ reduction in message dimension (64$\to$8), performance changes by only 0.06 on MPE (Table~\ref{tab:cr_ablation}). This is a practically important result: ExpoComm-B can operate at a fraction of the communication bandwidth with negligible performance cost.
+Across 8$\times$ reduction in message dimension (64$\to$8), performance changes by only 0.06 on MPE (Table~\ref{tab:cr_ablation}), from $-8.16$ to $-8.22$. This is a practically important result: ExpoComm-B can operate at a fraction of the communication bandwidth with negligible performance cost.
 
 \paragraph{Limitations.}
 \textbf{(1) Single seed.} All experiments used a single seed (123 for MAgent, 0 for MPE). Results may not be statistically representative.
@@ -268,7 +268,7 @@ Across 8$\times$ reduction in message dimension (64$\to$8), performance changes 
 \section{Conclusion}
 \label{sec:conclusion}
 
-We presented ExpoComm-B, which jointly optimizes sparse communication topology (who to communicate with) and message bandwidth (how much information to transmit) in cooperative MARL. On MPE Simple Spread, ExpoComm-B achieves a final test return of $-8.21$ vs.\ $-26.60$ to $-28.90$ for three single-axis baselines. On MAgent Battle, the $\sigma_0=0.05$ variant reduces enemy survivors from 72.4 (QMIX) to 3.6. Ablation studies on MPE show robustness to the KL weight ($\lambda$ varies across five decades with $<0.4$ point change) and the compression ratio (8$\times$ compression with $<0.06$ point change). These results demonstrate that jointly optimizing topology and bandwidth yields significantly better coordination than optimizing either dimension in isolation.
+We presented ExpoComm-B, which jointly optimizes sparse communication topology (who to communicate with) and message bandwidth (how much information to transmit) in cooperative MARL. On MPE Simple Spread, ExpoComm-B achieves a final test return of $-8.16$ vs.\ $-26.60$ to $-28.90$ for three single-axis baselines. On MAgent Battle, the $\sigma_0=0.05$ variant reduces enemy survivors from 72.4 (QMIX) to 3.6. Ablation studies on MPE show robustness to the KL weight ($\lambda$ varies across five decades with $<0.42$ point change) and the compression ratio (8$\times$ compression with $<0.06$ point change). These results demonstrate that jointly optimizing topology and bandwidth yields significantly better coordination than optimizing either dimension in isolation.
 
 \smallskip
 \noindent\textbf{Code:} \href{https://github.com/vt20-crypto/ExpoComm-B}{github.com/vt20-crypto/ExpoComm-B}
